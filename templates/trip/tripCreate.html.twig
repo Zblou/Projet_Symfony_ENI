@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+{% block title %}Création Sortie{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/tripCreation.css') }}">
+{% endblock %}
+
+{% block body %}
+    <br>
+    <h2>Créer une sortie</h2>
+    <br><br>
+    <div class="container text-center">
+        {{ form_start(tripForm) }}
+
+        {# ligne 1 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(tripForm.name) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.name) }}</div>
+                    {{ form_errors(tripForm.name) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(tripForm.campus) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.campus) }}</div>
+                    {{ form_errors(tripForm.campus) }}
+                </div>
+            </div>
+        </div>
+
+        {# ligne 2 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(tripForm.dateStartTime) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.dateStartTime) }}</div>
+                    {{ form_errors(tripForm.dateStartTime) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(tripForm.place) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.place) }}</div>
+                    {{ form_errors(tripForm.place) }}
+                </div>
+            </div>
+        </div>
+
+        {# ligne 3 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(tripForm.registrationDeadLine) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.registrationDeadLine) }}</div>
+                    {{ form_errors(tripForm.registrationDeadLine) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(tripForm.nbRegistrationsMax) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.nbRegistrationsMax) }}</div>
+                    {{ form_errors(tripForm.nbRegistrationsMax) }}
+                </div>
+            </div>
+        </div>
+
+        {# ligne 4 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(tripForm.duration) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.duration) }}</div>
+                    {{ form_errors(tripForm.duration) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">Rue : zgzgqrfgzgqzreg</div>
+                    <div class="col-6">Code Postal : zefzgsegetsg</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary">Ajouter</button>
+        {{ form_end(tripForm) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+#formulaire{
+    width:65%;
+    float:right;
+    text-align: center;
+    margin-top: 2em;
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="file"], #my_profile_campus{
+    width:40%;
+    margin-left: 30%;
+}
+body{
+    background-color: lightsalmon;
+}
+.btn{
+    margin-top: 20px;
+}
+.btn-primary{
+    margin-right: 30px;
+}
+.photo{
+    border: 1px solid black;
+    margin-top: 7em;
+    width: 400px;
+    height: 300px;
+    float:left;
+}
