@@ -17,13 +17,13 @@ class Campus
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank(message: 'Veuillez renseigner un nom pour votre campus')]
-    private ?string $nom = null;
+    #[Assert\NotBlank(message: 'Veuillez renseigner un name pour votre campus')]
+    private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Participant::class, orphanRemoval: true)]
     private Collection $students;
 
-    #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Sortie::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Trip::class, orphanRemoval: true)]
     private Collection $campusTrips;
 
     public function __construct()
@@ -37,14 +37,14 @@ class Campus
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
@@ -80,14 +80,14 @@ class Campus
     }
 
     /**
-     * @return Collection<int, Sortie>
+     * @return Collection<int, Trip>
      */
-    public function getSortiesCampus(): Collection
+    public function getTripsCampus(): Collection
     {
         return $this->campusTrips;
     }
 
-    public function addSortiesCampus(Sortie $campusTrips): static
+    public function addTripsCampus(Trip $campusTrips): static
     {
         if (!$this->campusTrips->contains($campusTrips)) {
             $this->campusTrips->add($campusTrips);
@@ -97,7 +97,7 @@ class Campus
         return $this;
     }
 
-    public function removeSortiesCampus(Sortie $campusTrips): static
+    public function removeTripsCampus(Trip $campusTrips): static
     {
         if ($this->campusTrips->removeElement($campusTrips)) {
             // set the owning side to null (unless already changed)

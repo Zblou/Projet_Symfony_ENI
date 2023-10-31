@@ -13,6 +13,7 @@ class CityFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
+
         for($i = 1; $i <= 5 ; $i++){
             $city = new City();
             $city->setName($faker->city());
