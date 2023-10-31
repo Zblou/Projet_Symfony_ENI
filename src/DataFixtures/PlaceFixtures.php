@@ -16,13 +16,13 @@ class PlaceFixtures extends Fixture implements DependentFixtureInterface
 
         for($i = 1; $i <= 5 ; $i++){
             $lieu = new Place();
-            $lieu->setVille($this->getReference('ville'.mt_rand(1,5)));
-            $lieu->setNom($faker->words(asText: true));
-            $lieu->setRue($faker->address());
+            $lieu->setCity($this->getReference('city'.mt_rand(1,5)));
+            $lieu->setName($faker->words(asText: true));
+            $lieu->setStreet($faker->address());
             $lieu->setLatitude($faker->latitude());
             $lieu->setLongitude($faker->longitude());
             $manager->persist($lieu);
-            $this->addReference('lieu'.$i, $lieu);
+            $this->addReference('place'.$i, $lieu);
         }
 
         $manager->flush();

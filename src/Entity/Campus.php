@@ -23,7 +23,7 @@ class Campus
     #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Participant::class, orphanRemoval: true)]
     private Collection $students;
 
-    #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Trip::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Trip::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $campusTrips;
 
     public function __construct()

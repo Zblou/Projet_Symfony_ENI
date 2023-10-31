@@ -16,23 +16,24 @@ class CampusFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-
+/*
         $campus = new Campus();
         $campus->setName($faker->city());
-        $campus->addStudent(new Participant());
-        $campus->addTripsCampus(new Trip());
+        $participant = new Participant();
+        $campus->addStudent($participant);
+        $campus->addTripsCampus($this->getReference());
         //$this->addReference('campus'.$i, $campus);
-        $manager->persist($campus);
+        $manager->persist($campus);*/
 
-/*
+
         for($i = 1; $i <= 5 ; $i++){
            $campus = new Campus();
-           $campus->setNom($faker->city());
-           $campus->addStudent($this->getReference('student'.mt_rand(1,20)));
-           $campus->addSortiesCampus($this->getReference('sortie'.mt_rand(1,5)));
+           $campus->setName($faker->city());
+           //$campus->addStudent($this->getReference('student'.mt_rand(1,20)));
+           //$campus->addTripsCampus($this->getReference('sortie'.mt_rand(1,5)));
            $this->addReference('campus'.$i, $campus);
            $manager->persist($campus);
-        }*/
+        }
 
         $manager->flush();
     }
