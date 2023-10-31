@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Campus;
-use App\Entity\Etat;
+use App\Entity\State;
 use App\Entity\Trip;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
