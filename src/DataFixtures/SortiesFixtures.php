@@ -43,8 +43,7 @@ class SortiesFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies():array
-    {
+    public function getDependencies():array    {
         return [CampusFixtures::class, ParticipantsFixtures::class, PlaceFixtures::class, StateFixtures::class];
     }
 }
