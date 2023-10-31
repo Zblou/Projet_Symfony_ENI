@@ -39,7 +39,6 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
                 $trip->addParticipant($this->getReference('participant'.mt_rand(1,20)));
             }
             $trip->setOrganizer($this->getReference('participant'.mt_rand(1,20)));
-            var_dump($trip);
             $manager->persist($trip);
         }
 
