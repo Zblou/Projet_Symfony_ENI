@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\LieuRepository;
+use App\Repository\PlaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: LieuRepository::class)]
+#[ORM\Entity(repositoryClass: PlaceRepository::class)]
 class Place
 {
     #[ORM\Id]
