@@ -1,15 +1,23 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="{{ path('app_home') }}">Logo Sortir.com</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Home</a>
+                <a class="nav-link" href="#">Trips</a>
+                <a class="nav-link" href="#">Cities</a>
+                <a class="nav-link" href="#">Campus</a>
+                {# Se connecter #}
+                <a class="nav-link" href="#">Log In</a>
+                {# Si l'utilisateur est connecté on affiche ces 2 liens #}
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('app_profile') }}">My profile</a>
+                    <a class="nav-link" href="#">Log Out</a>
+                {% endif %}
+
             </div>
         </div>
     </div>
