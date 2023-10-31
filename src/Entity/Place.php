@@ -17,12 +17,12 @@ class Place
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank(message: 'Le nom ne peut être vide')]
-    private ?string $nom = null;
+    #[Assert\NotBlank(message: 'This field can\'t be empty')]
+    private ?string $name = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank(message: 'La rue ne peut être vide')]
-    private ?string $rue = null;
+    #[Assert\NotBlank(message: 'This field can\'t be empty')]
+    private ?string $street = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $latitude = null;
@@ -30,16 +30,16 @@ class Place
     #[ORM\Column(nullable: true)]
     private ?float $longitude = null;
 
-    #[ORM\OneToMany(mappedBy: 'lieu', targetEntity: Sortie::class, orphanRemoval: true)]
-    private Collection $sorties;
+    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Trip::class, orphanRemoval: true)]
+    private Collection $trips;
 
-    #[ORM\ManyToOne(inversedBy: 'lieux')]
+    #[ORM\ManyToOne(inversedBy: 'place')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Ville $ville = null;
+    private ?City $city = null;
 
     public function __construct()
     {
-        $this->sorties = new ArrayCollection();
+        $this->trips = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,26 +47,26 @@ class Place
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getRue(): ?string
+    public function getStreet(): ?string
     {
-        return $this->rue;
+        return $this->street;
     }
 
-    public function setRue(string $rue): static
+    public function setStreet(string $street): static
     {
-        $this->rue = $rue;
+        $this->street = $street;
 
         return $this;
     }
@@ -96,43 +96,43 @@ class Place
     }
 
     /**
-     * @return Collection<int, Sortie>
+     * @return Collection<int, Trip>
      */
-    public function getSorties(): Collection
+    public function getTrips(): Collection
     {
-        return $this->sorties;
+        return $this->trips;
     }
 
-    public function addSorty(Sortie $sorty): static
+    public function addTrip(Trip $trip): static
     {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties->add($sorty);
-            $sorty->setLieu($this);
+        if (!$this->trips->contains($trip)) {
+            $this->trips->add($trip);
+            $trip->setStreet($this);
         }
 
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): static
+    public function removeTrip(Trip $trip): static
     {
-        if ($this->sorties->removeElement($sorty)) {
+        if ($this->trips->removeElement($trip)) {
             // set the owning side to null (unless already changed)
-            if ($sorty->getLieu() === $this) {
-                $sorty->setLieu(null);
+            if ($trip->getStreet() === $this) {
+                $trip->setStreet(null);
             }
         }
 
         return $this;
     }
 
-    public function getVille(): ?Ville
+    public function getCity(): ?City
     {
-        return $this->ville;
+        return $this->city;
     }
 
-    public function setVille(?Ville $ville): static
+    public function setCity(?City $city): static
     {
-        $this->ville = $ville;
+        $this->city = $city;
 
         return $this;
     }
