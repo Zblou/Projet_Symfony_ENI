@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\SortieRepository;
+use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: SortieRepository::class)]
-class Sortie
+#[ORM\Entity(repositoryClass: TripRepository::class)]
+class Trip
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,52 +18,52 @@ class Sortie
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
-    private ?string $nom = null;
+    private ?string $name = null;
 
     #[ORM\Column]
     #[Assert\DateTime]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
-    private ?\DateTimeImmutable $dateHeureDebut = null;
+    private ?\DateTimeImmutable $dateStartTime = null;
 
     #[ORM\Column]
-    #[Assert\GreaterThanOrEqual(30, message: 'la durée de la sortie doit être de minimum 30 minutes.')]
+    #[Assert\GreaterThanOrEqual(30, message: 'la durée de la trip doit être de minimum 30 minutes.')]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
-    private ?int $duree = null;
+    private ?int $duration = null;
 
     #[ORM\Column]
     #[Assert\DateTime]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
-    private ?\DateTimeImmutable $dateLimiteInscription = null;
+    private ?\DateTimeImmutable $registrationDeadLine = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
     #[Assert\GreaterThan(2, 'Il faut au moins créer une activité dans lesquelles 2 personnes peuvent participer')]
-    private ?int $nbInscriptionsMax = null;
+    private ?int $nbRegistrationsMax = null;
 
     #[ORM\Column(length: 1000, nullable: true)]
-    private ?string $infosSortie = null;
+    private ?string $infosTrip = null;
 
     #[ORM\Column(length: 1000, nullable: true)]
-    private ?string $motifAnnulation = null;
+    private ?string $reasonCancellation = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Etat $etat = null;
+    private ?Etat $state = null;
 
-    #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'sorties')]
+    #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'trips')]
     private Collection $participants;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Participant $organisateur = null;
+    private ?Participant $organizer = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sortiesCampus')]
+    #[ORM\ManyToOne(inversedBy: 'tripsCampus')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sorties')]
+    #[ORM\ManyToOne(inversedBy: 'trips')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Place $lieu = null;
+    private ?Place $place = null;
 
     public function __construct()
     {
@@ -75,98 +75,98 @@ class Sortie
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getDateHeureDebut(): ?\DateTimeImmutable
+    public function getDateStartTime(): ?\DateTimeImmutable
     {
-        return $this->dateHeureDebut;
+        return $this->dateStartTime;
     }
 
-    public function setDateHeureDebut(\DateTimeImmutable $dateHeureDebut): static
+    public function setDateStartTime(\DateTimeImmutable $dateStartTime): static
     {
-        $this->dateHeureDebut = $dateHeureDebut;
+        $this->dateStartTime = $dateStartTime;
 
         return $this;
     }
 
-    public function getDuree(): ?int
+    public function getDuration(): ?int
     {
-        return $this->duree;
+        return $this->duration;
     }
 
-    public function setDuree(int $duree): static
+    public function setDuration(int $duration): static
     {
-        $this->duree = $duree;
+        $this->duration = $duration;
 
         return $this;
     }
 
-    public function getDateLimiteInscription(): ?\DateTimeImmutable
+    public function getRegistrationDeadLine(): ?\DateTimeImmutable
     {
-        return $this->dateLimiteInscription;
+        return $this->registrationDeadLine;
     }
 
-    public function setDateLimiteInscription(\DateTimeImmutable $dateLimiteInscription): static
+    public function setRegistrationDeadLine(\DateTimeImmutable $RegistrationDeadLine): static
     {
-        $this->dateLimiteInscription = $dateLimiteInscription;
+        $this->registrationDeadLine = $RegistrationDeadLine;
 
         return $this;
     }
 
-    public function getNbInscriptionsMax(): ?int
+    public function getNbRegistrationsMax(): ?int
     {
-        return $this->nbInscriptionsMax;
+        return $this->nbRegistrationsMax;
     }
 
-    public function setNbInscriptionsMax(int $nbInscriptionsMax): static
+    public function setNbRegistrationsMax(int $NbRegistrationsMax): static
     {
-        $this->nbInscriptionsMax = $nbInscriptionsMax;
+        $this->nbRegistrationsMax = $NbRegistrationsMax;
 
         return $this;
     }
 
-    public function getInfosSortie(): ?string
+    public function getInfosTrip(): ?string
     {
-        return $this->infosSortie;
+        return $this->infosTrip;
     }
 
-    public function setInfosSortie(?string $infosSortie): static
+    public function setInfosTrip(?string $infosTrip): static
     {
-        $this->infosSortie = $infosSortie;
+        $this->infosTrip = $infosTrip;
 
         return $this;
     }
 
     public function getMotifAnnulation(): ?string
     {
-        return $this->motifAnnulation;
+        return $this->reasonCancellation;
     }
 
-    public function setMotifAnnulation(?string $motifAnnulation): static
+    public function setMotifAnnulation(?string $reasonCancellation): static
     {
-        $this->motifAnnulation = $motifAnnulation;
+        $this->reasonCancellation = $reasonCancellation;
 
         return $this;
     }
 
-    public function getEtat(): ?Etat
+    public function getState(): ?Etat
     {
-        return $this->etat;
+        return $this->state;
     }
 
-    public function setEtat(?Etat $etat): static
+    public function setState(?Etat $state): static
     {
-        $this->etat = $etat;
+        $this->state = $state;
 
         return $this;
     }
@@ -195,14 +195,14 @@ class Sortie
         return $this;
     }
 
-    public function getOrganisateur(): ?Participant
+    public function getOrganizer(): ?Participant
     {
-        return $this->organisateur;
+        return $this->organizer;
     }
 
-    public function setOrganisateur(?Participant $organisateur): static
+    public function setOrganizer(?Participant $organizer): static
     {
-        $this->organisateur = $organisateur;
+        $this->organizer = $organizer;
 
         return $this;
     }
@@ -219,14 +219,14 @@ class Sortie
         return $this;
     }
 
-    public function getLieu(): ?Place
+    public function getPlace(): ?Place
     {
-        return $this->lieu;
+        return $this->place;
     }
 
-    public function setLieu(?Place $lieu): static
+    public function setPlace(?Place $place): static
     {
-        $this->lieu = $lieu;
+        $this->place = $place;
 
         return $this;
     }

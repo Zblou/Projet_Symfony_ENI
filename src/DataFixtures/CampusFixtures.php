@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Campus;
 use App\Entity\Participant;
-use App\Entity\Sortie;
+use App\Entity\Trip;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -20,7 +20,7 @@ class CampusFixtures extends Fixture
         $campus = new Campus();
         $campus->setNom($faker->city());
         $campus->addEtudiant(new Participant());
-        $campus->addSortiesCampus(new Sortie());
+        $campus->addSortiesCampus(new Trip());
         //$this->addReference('campus'.$i, $campus);
         $manager->persist($campus);
 

@@ -52,7 +52,7 @@ class Participant
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $photoURL = null;
 
-    #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'participants')]
+    #[ORM\ManyToMany(targetEntity: Trip::class, mappedBy: 'participants')]
     private Collection $sorties;
 
     #[ORM\ManyToOne(inversedBy: 'etudiants')]
@@ -166,14 +166,14 @@ class Participant
     }
 
     /**
-     * @return Collection<int, Sortie>
+     * @return Collection<int, Trip>
      */
     public function getSorties(): Collection
     {
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): static
+    public function addSorty(Trip $sorty): static
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties->add($sorty);
@@ -183,7 +183,7 @@ class Participant
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): static
+    public function removeSorty(Trip $sorty): static
     {
         if ($this->sorties->removeElement($sorty)) {
             $sorty->removeParticipant($this);

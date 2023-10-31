@@ -30,7 +30,7 @@ class Place
     #[ORM\Column(nullable: true)]
     private ?float $longitude = null;
 
-    #[ORM\OneToMany(mappedBy: 'lieu', targetEntity: Sortie::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'lieu', targetEntity: Trip::class, orphanRemoval: true)]
     private Collection $sorties;
 
     #[ORM\ManyToOne(inversedBy: 'lieux')]
@@ -96,14 +96,14 @@ class Place
     }
 
     /**
-     * @return Collection<int, Sortie>
+     * @return Collection<int, Trip>
      */
     public function getSorties(): Collection
     {
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): static
+    public function addSorty(Trip $sorty): static
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties->add($sorty);
@@ -113,7 +113,7 @@ class Place
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): static
+    public function removeSorty(Trip $sorty): static
     {
         if ($this->sorties->removeElement($sorty)) {
             // set the owning side to null (unless already changed)
