@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trips List!{% endblock %}
+
+{% block body %}
+{# boucler sur les sorties #}
+    <ul>
+        {% for trip in trips %}
+            <li>{{ trip.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
