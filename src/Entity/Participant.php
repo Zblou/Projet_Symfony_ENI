@@ -52,7 +52,7 @@ class Participant
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $photoURL = null;
 
-    #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'participants')]
+    #[ORM\ManyToMany(targetEntity: Trip::class, mappedBy: 'participants')]
     private Collection $trips;
 
     #[ORM\ManyToOne(inversedBy: 'students')]
