@@ -6,8 +6,8 @@ use App\Repository\EtatRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: EtatRepository::class)]
-class Etat
+#[ORM\Entity(repositoryClass: StateRepository::class)]
+class State
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,21 +16,21 @@ class Etat
 
     #[ORM\Column(length: 30)]
     #[Assert\NotBlank]
-    private ?string $libelle = null;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getName(): ?string
     {
-        return $this->libelle;
+        return $this->name;
     }
 
-    public function setLibelle(string $libelle): static
+    public function setName(string $name): static
     {
-        $this->libelle = $libelle;
+        $this->name = $name;
 
         return $this;
     }

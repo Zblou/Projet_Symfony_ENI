@@ -21,32 +21,32 @@ class Participant
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank(message: 'Le nom ne peut être vide')]
-    private ?string $nom = null;
+    #[Assert\NotBlank(message: 'Name can\'t be Empty')]
+    private ?string $name = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank(message: 'Le prenom ne peut être vide')]
+    #[Assert\NotBlank(message: 'Firstname can\'t be empty')]
 
-    private ?string $prenom = null;
+    private ?string $firstname = null;
 
     #[ORM\Column(length: 10)]
-    #[Assert\NotBlank(message: 'Le numéro de téléphone ne peut être vide')]
-    private ?string $telephone = null;
+    #[Assert\NotBlank(message: 'Phone number can\'t be empty')]
+    private ?string $phone = null;
 
     #[ORM\Column(length: 30)]
-    #[Assert\Email(message: 'Ce champ doit respecter le format d\'un email')]
-    #[Assert\NotBlank(message: 'Le mail ne peut être vide')]
+    #[Assert\Email(message: 'This filed must respect email format')]
+    #[Assert\NotBlank(message: 'Mail can\'t be empty')]
     private ?string $mail = null;
 
     #[ORM\Column(length: 30)]
-    #[Assert\NotBlank(message: 'Le mot de passe ne peut être vide')]
-    private ?string $motDePasse = null;
+    #[Assert\NotBlank(message: 'Password can\'t be empty')]
+    private ?string $password = null;
 
     #[ORM\Column]
-    private ?bool $actif = null;
+    private ?bool $active = null;
 
     #[ORM\Column(length: 50, unique: true, nullable: true)]
-    #[Assert\Length(min:4, minMessage: ('Le pseudo doit au minimum être de 4 caractères'))]
+    #[Assert\Length(min:4, minMessage: ('Pseudo must be at least 4 characters long'))]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -69,38 +69,38 @@ class Participant
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getFirstname(): ?string
     {
-        return $this->prenom;
+        return $this->firstname;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setFirstname(string $firstname): static
     {
-        $this->prenom = $prenom;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getPhone(): ?string
     {
-        return $this->telephone;
+        return $this->phone;
     }
 
-    public function setTelephone(string $telephone): static
+    public function setPhone(string $phone): static
     {
-        $this->telephone = $telephone;
+        $this->phone = $phone;
 
         return $this;
     }
@@ -117,26 +117,26 @@ class Participant
         return $this;
     }
 
-    public function getMotDePasse(): ?string
+    public function getPassword(): ?string
     {
-        return $this->motDePasse;
+        return $this->password;
     }
 
-    public function setMotDePasse(string $motDePasse): static
+    public function setPassword(string $password): static
     {
-        $this->motDePasse = $motDePasse;
+        $this->password = $password;
 
         return $this;
     }
 
-    public function isActif(): ?bool
+    public function isActive(): ?bool
     {
-        return $this->actif;
+        return $this->active;
     }
 
-    public function setActif(bool $actif): static
+    public function setActive(bool $active): static
     {
-        $this->actif = $actif;
+        $this->active = $active;
 
         return $this;
     }
@@ -166,14 +166,14 @@ class Participant
     }
 
     /**
-     * @return Collection<int, Sortie>
+     * @return Collection<int, Trip>
      */
-    public function getSorties(): Collection
+    public function getTrips(): Collection
     {
         return $this->trips;
     }
 
-    public function addTrip(Sortie $trip): static
+    public function addTrips(Trip $trip): static
     {
         if (!$this->trips->contains($trip)) {
             $this->trips->add($trip);
@@ -183,7 +183,7 @@ class Participant
         return $this;
     }
 
-    public function removeTrip(Sortie $trip): static
+    public function removeTrip(Trip $trip): static
     {
         if ($this->trips->removeElement($trip)) {
             $trip->removeParticipant($this);
