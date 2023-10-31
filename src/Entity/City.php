@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\VilleRepository;
+use App\Repository\CityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: VilleRepository::class)]
-class Ville
+#[ORM\Entity(repositoryClass: CityRepository::class)]
+class City
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,7 +24,7 @@ class Ville
     #[Assert\NotBlank(message: 'This field can\'t be empty')]
     private ?string $postalCode = null;
 
-    #[ORM\OneToMany(mappedBy: 'ville', targetEntity: place::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Place::class, orphanRemoval: true)]
     private Collection $places;
 
     public function __construct()
@@ -37,32 +37,32 @@ class Ville
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getCodePostal(): ?string
+    public function getPostalCode(): ?string
     {
-        return $this->codePostal;
+        return $this->postalCode;
     }
 
-    public function setCodePostal(string $codePostal): static
+    public function setPostalCode(string $postalCode): static
     {
-        $this->codePostal = $codePostal;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, place>
+     * @return Collection<int, Place>
      */
     public function getPlaces(): Collection
     {
@@ -73,7 +73,7 @@ class Ville
     {
         if (!$this->places->contains($places)) {
             $this->places->add($places);
-            $places->setVille($this);
+            $places->setCity($this);
         }
 
         return $this;
@@ -83,8 +83,8 @@ class Ville
     {
         if ($this->places->removeElement($places)) {
             // set the owning side to null (unless already changed)
-            if ($places->getVille() === $this) {
-                $places->setVille(null);
+            if ($places->getCity() === $this) {
+                $places->setCity(null);
             }
         }
 
