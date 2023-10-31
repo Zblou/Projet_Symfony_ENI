@@ -20,15 +20,15 @@ class ParticipantsFixtures extends Fixture implements DependentFixtureInterface
 
         for($i = 1 ; $i <= 20 ; $i++){
             $participant = new Participant();
-            $participant->setNom($faker->lastName());
-            $participant->setPrenom($faker->firstName());
+            $participant->setName($faker->lastName());
+            $participant->setFirstname($faker->firstName());
             $participant->setMail($faker->email());
             //$password = $this->userPasswordHasher->hashPassword($participant, '123456');
-            $participant->setMotDePasse('123456');
+            $participant->setPassword('123456');
             $participant->setCampus($this->getReference('campus'.mt_rand(1,5)));
-            $participant->setTelephone($faker->phoneNumber());
+            $participant->setPhone($faker->phoneNumber());
             $participant->setPseudo($faker->userName());
-            $participant->setActif(true);
+            $participant->setActive(true);
             $manager->persist($participant);
             $this->addReference('participant'.$i, $participant);
         }
