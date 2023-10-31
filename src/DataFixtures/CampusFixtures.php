@@ -19,8 +19,8 @@ class CampusFixtures extends Fixture
 
         $campus = new Campus();
         $campus->setNom($faker->city());
-        $campus->addEtudiant(new Participant());
-        $campus->addSortiesCampus(new Sortie());
+        $campus->addStudent(new Participant());
+        $campus->addSortiesCampus(new Trip());
         //$this->addReference('campus'.$i, $campus);
         $manager->persist($campus);
 
@@ -28,7 +28,7 @@ class CampusFixtures extends Fixture
         for($i = 1; $i <= 5 ; $i++){
            $campus = new Campus();
            $campus->setNom($faker->city());
-           $campus->addEtudiant($this->getReference('etudiant'.mt_rand(1,20)));
+           $campus->addStudent($this->getReference('student'.mt_rand(1,20)));
            $campus->addSortiesCampus($this->getReference('sortie'.mt_rand(1,5)));
            $this->addReference('campus'.$i, $campus);
            $manager->persist($campus);

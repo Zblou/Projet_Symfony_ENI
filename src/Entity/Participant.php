@@ -53,15 +53,15 @@ class Participant
     private ?string $photoURL = null;
 
     #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'participants')]
-    private Collection $sorties;
+    private Collection $trips;
 
-    #[ORM\ManyToOne(inversedBy: 'etudiants')]
+    #[ORM\ManyToOne(inversedBy: 'students')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
     public function __construct()
     {
-        $this->sorties = new ArrayCollection();
+        $this->trips = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,23 +170,23 @@ class Participant
      */
     public function getSorties(): Collection
     {
-        return $this->sorties;
+        return $this->trips;
     }
 
-    public function addSorty(Sortie $sorty): static
+    public function addTrip(Sortie $trip): static
     {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties->add($sorty);
-            $sorty->addParticipant($this);
+        if (!$this->trips->contains($trip)) {
+            $this->trips->add($trip);
+            $trip->addParticipant($this);
         }
 
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): static
+    public function removeTrip(Sortie $trip): static
     {
-        if ($this->sorties->removeElement($sorty)) {
-            $sorty->removeParticipant($this);
+        if ($this->trips->removeElement($trip)) {
+            $trip->removeParticipant($this);
         }
 
         return $this;

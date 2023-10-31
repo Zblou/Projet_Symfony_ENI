@@ -21,15 +21,15 @@ class Campus
     private ?string $nom = null;
 
     #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Participant::class, orphanRemoval: true)]
-    private Collection $etudiants;
+    private Collection $students;
 
     #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Sortie::class, orphanRemoval: true)]
-    private Collection $sortiesCampus;
+    private Collection $campusTrips;
 
     public function __construct()
     {
-        $this->etudiants = new ArrayCollection();
-        $this->sortiesCampus = new ArrayCollection();
+        $this->students = new ArrayCollection();
+        $this->campusTrips= new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,27 +52,27 @@ class Campus
     /**
      * @return Collection<int, Participant>
      */
-    public function getEtudiants(): Collection
+    public function getStudents(): Collection
     {
-        return $this->etudiants;
+        return $this->students;
     }
 
-    public function addEtudiant(Participant $etudiant): static
+    public function addStudent(Participant $student): static
     {
-        if (!$this->etudiants->contains($etudiant)) {
-            $this->etudiants->add($etudiant);
-            $etudiant->setCampus($this);
+        if (!$this->students->contains($student)) {
+            $this->students->add($student);
+            $student->setCampus($this);
         }
 
         return $this;
     }
 
-    public function removeEtudiant(Participant $etudiant): static
+    public function removeStudent(Participant $student): static
     {
-        if ($this->etudiants->removeElement($etudiant)) {
+        if ($this->students->removeElement($student)) {
             // set the owning side to null (unless already changed)
-            if ($etudiant->getCampus() === $this) {
-                $etudiant->setCampus(null);
+            if ($student->getCampus() === $this) {
+                $student->setCampus(null);
             }
         }
 
@@ -84,25 +84,25 @@ class Campus
      */
     public function getSortiesCampus(): Collection
     {
-        return $this->sortiesCampus;
+        return $this->campusTrips;
     }
 
-    public function addSortiesCampus(Sortie $sortiesCampus): static
+    public function addSortiesCampus(Sortie $campusTrips): static
     {
-        if (!$this->sortiesCampus->contains($sortiesCampus)) {
-            $this->sortiesCampus->add($sortiesCampus);
-            $sortiesCampus->setCampus($this);
+        if (!$this->campusTrips->contains($campusTrips)) {
+            $this->campusTrips->add($campusTrips);
+            $campusTrips->setCampus($this);
         }
 
         return $this;
     }
 
-    public function removeSortiesCampus(Sortie $sortiesCampus): static
+    public function removeSortiesCampus(Sortie $campusTrips): static
     {
-        if ($this->sortiesCampus->removeElement($sortiesCampus)) {
+        if ($this->campusTrips->removeElement($campusTrips)) {
             // set the owning side to null (unless already changed)
-            if ($sortiesCampus->getCampus() === $this) {
-                $sortiesCampus->setCampus(null);
+            if ($campusTrips->getCampus() === $this) {
+                $campusTrips->setCampus(null);
             }
         }
 
