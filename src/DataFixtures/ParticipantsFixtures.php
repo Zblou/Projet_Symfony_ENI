@@ -18,6 +18,19 @@ class ParticipantsFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = \Faker\Factory::create('fr_FR');
 
+        //Participant de test
+        $testParticipant = new Participant();
+        $testParticipant->setName('test');
+        $testParticipant->setPseudo('test');
+        $testParticipant->setCampus($this->getReference('campus'.mt_rand(1,5)));
+        $testParticipant->setMail('test@test.fr');
+        $testParticipant->setPassword('123456');
+        $testParticipant->setFirstname('test');
+        $testParticipant->setActive(true);
+        $testParticipant->setPhone('0789654725');
+        $manager->persist($testParticipant);
+
+
         for($i = 1 ; $i <= 20 ; $i++){
             $participant = new Participant();
             $participant->setName($faker->lastName());
