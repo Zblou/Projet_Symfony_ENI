@@ -2,13 +2,12 @@
 
 {% block title %}My profile {% endblock %}
 
-{% include 'navbar/navbar.html.twig' %}
-
 {% block body %}
-
 <div class="container">
     <h2>My profile</h2>
-
+    {{ form_start(myProfileForm) }}
+    {{ form_widget(myProfileForm) }}
+    {{ form_end(myProfileForm) }}
 </div>
 
 {% endblock %}
