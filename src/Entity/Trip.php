@@ -48,7 +48,7 @@ class Trip
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Etat $state = null;
+    private ?State $state = null;
 
     #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'trips')]
     private Collection $participants;
@@ -159,12 +159,12 @@ class Trip
         return $this;
     }
 
-    public function getState(): ?Etat
+    public function getState(): ?State
     {
         return $this->state;
     }
 
-    public function setState(?Etat $state): static
+    public function setState(?State $state): static
     {
         $this->state = $state;
 
