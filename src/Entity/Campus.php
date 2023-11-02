@@ -20,7 +20,7 @@ class Campus
     #[Assert\NotBlank(message: 'Veuillez renseigner un name pour votre campus')]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Participant::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'campus', targetEntity: User::class, orphanRemoval: true)]
     private Collection $students;
 
     #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Trip::class, cascade: ['persist'], orphanRemoval: true)]
@@ -57,7 +57,7 @@ class Campus
         return $this->students;
     }
 
-    public function addStudent(Participant $student): static
+    public function addStudent(User $student): static
     {
         if (!$this->students->contains($student)) {
             $this->students->add($student);
@@ -67,7 +67,7 @@ class Campus
         return $this;
     }
 
-    public function removeStudent(Participant $student): static
+    public function removeStudent(User $student): static
     {
         if ($this->students->removeElement($student)) {
             // set the owning side to null (unless already changed)

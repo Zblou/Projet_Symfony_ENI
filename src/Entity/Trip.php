@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
+use App\DataFixtures\StateFixtures;
+use App\Repository\StateRepository;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TripRepository::class)]
 class Trip
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -21,7 +25,6 @@ class Trip
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Assert\DateTime]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
     private ?\DateTimeImmutable $dateStartTime = null;
 
@@ -31,13 +34,12 @@ class Trip
     private ?int $duration = null;
 
     #[ORM\Column]
-    #[Assert\DateTime]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
     private ?\DateTimeImmutable $registrationDeadLine = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
-    #[Assert\GreaterThan(2, 'Il faut au moins créer une activité dans lesquelles 2 personnes peuvent participer')]
+    #[Assert\GreaterThan(2, message: 'Il faut au moins créer une activité dans lesquelles 2 personnes peuvent participer')]
     private ?int $nbRegistrationsMax = null;
 
     #[ORM\Column(length: 1000, nullable: true)]
@@ -50,12 +52,12 @@ class Trip
     #[ORM\JoinColumn(nullable: false)]
     private ?State $state = null;
 
-    #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'trips')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'trips')]
     private Collection $participants;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Participant $organizer = null;
+    private ?User $organizer = null;
 
     #[ORM\ManyToOne(inversedBy: 'tripsCampus')]
     #[ORM\JoinColumn(nullable: false)]
@@ -68,6 +70,8 @@ class Trip
     public function __construct()
     {
         $this->participants = new ArrayCollection();
+        $this->state = new State();
+        $this->state->setName('Créée');
     }
 
     public function getId(): ?int
@@ -172,14 +176,14 @@ class Trip
     }
 
     /**
-     * @return Collection<int, Participant>
+     * @return Collection<int, User>
      */
     public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    public function addParticipant(Participant $participant): static
+    public function addParticipant(User $participant): static
     {
         if (!$this->participants->contains($participant)) {
             $this->participants->add($participant);
@@ -188,14 +192,14 @@ class Trip
         return $this;
     }
 
-    public function removeParticipant(Participant $participant): static
+    public function removeParticipant(User $participant): static
     {
         $this->participants->removeElement($participant);
 
         return $this;
     }
 
-    public function getOrganizer(): ?Participant
+    public function getOrganizer(): ?User
     {
         return $this->organizer;
     }

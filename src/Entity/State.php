@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\EtatRepository;
+use App\Repository\StateRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
