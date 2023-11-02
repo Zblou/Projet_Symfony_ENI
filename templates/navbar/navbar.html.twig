@@ -10,15 +10,24 @@
                 <a class="nav-link" href="#">Trips</a>
                 <a class="nav-link" href="#">Cities</a>
                 <a class="nav-link" href="#">Campus</a>
-                {# Se connecter #}
-                <a class="nav-link" href="{{ path('app_login') }}">Log In</a>
-                {# Si l'utilisateur est connecté on affiche ces 2 liens #}
-                {% if app.user %}
-                    <a class="nav-link" href="{{ path('modify_profile' ,{'id' : app.user.id}) }}">My profile</a>
-                    <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>
-                {% endif %}
 
             </div>
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0 container-fluid">
+                    {# Si l'utilisateur est connecté on affiche ces 2 liens #}
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('modify_profile' ,{'id' : app.user.id}) }}">My profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>
+                        </li>
+                        {% else %}
+                    <li class="nav-item">
+                            {# Se connecter #}
+                            <a class="nav-link" href="{{ path('app_login') }}">Log In</a>
+                    </li>
+                    {% endif %}
+                </ul>
         </div>
     </div>
 </nav>

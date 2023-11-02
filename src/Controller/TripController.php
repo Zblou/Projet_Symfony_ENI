@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Trip;
 use App\Form\TripType;
+use App\Repository\StateRepository;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,19 +28,22 @@ class TripController extends AbstractController
     }
 
     #[Route('/create', name: 'create_trip', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, StateRepository $sr): Response
     {
         $trip = new Trip();
+        $trip->setState($sr->findOneBy(['name' => 'Créée']));
+        $trip->setOrganizer($this->getUser());
+
         $tripForm = $this->createForm(TripType::class, $trip);
+        $tripForm->handleRequest($request);
 
         if($tripForm->isSubmitted() && $tripForm->isValid()){
-            $trip->setOrganizer($request->getUser());
             $em->persist($trip);
             $em->flush();
 
             $this->addFlash('success', 'La sortie a bien été enregistrée !');
 
-            return $this->redirectToRoute('trip_details', ['id' => $trip->getId()]);
+            return $this->redirectToRoute('displayAll');
         }
 
         return $this->render('trip/tripCreate.html.twig', [

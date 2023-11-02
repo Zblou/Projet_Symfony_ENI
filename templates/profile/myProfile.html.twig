@@ -3,8 +3,19 @@
 {% block title %}My profile {% endblock %}
 {% block stylesheets %} <link rel="stylesheet" href="{{ asset('css/formMyProfile.css') }}">{% endblock %}
 {% block body %}
+
+    {%  for label,messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="photo">
-        <img src="{{ asset('ProfilePictures/defaultPP.jpg') }}" alt="image de profil par défaut">
+        {% if app.user.photoURL %}
+            <img src="{{ asset(app_profilepictures_directory ~ '/' ~ app.user.photoURL) }}" alt="profile picture "/>
+        {% endif %}
     </div>
 
     <div class="row">
@@ -15,9 +26,8 @@
             {{ form_widget(myProfileForm) }}
 
             <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-light">Réinitialiser le mot de passe</button>
-            <button type="button" class="btn btn-danger">Cancel</button>
-
+            <a href="{{ path('modify_password', {'id' : app.user.id}) }}" class="btn btn-light">Changer le mot de passe</a>
+            <a href="{{ path('app_home') }}" class="btn btn-danger">Cancel</a>
 
             {{ form_end(myProfileForm) }}
         </div>

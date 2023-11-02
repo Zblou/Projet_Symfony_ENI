@@ -8,6 +8,8 @@ use App\Entity\Trip;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use http\Client\Curl\User;
+
 ;
 
 class CampusFixtures extends Fixture
@@ -16,20 +18,11 @@ class CampusFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-/*
-        $campus = new Campus();
-        $campus->setName($faker->city());
-        $participant = new Participant();
-        $campus->addStudent($participant);
-        $campus->addTripsCampus($this->getReference());
-        //$this->addReference('campus'.$i, $campus);
-        $manager->persist($campus);*/
-
 
         for($i = 1; $i <= 5 ; $i++){
            $campus = new Campus();
            $campus->setName($faker->city());
-           //$campus->addStudent($this->getReference('student'.mt_rand(1,20)));
+           $campus->addStudent($this->getReference('user'.mt_rand(1,20)));
            //$campus->addTripsCampus($this->getReference('sortie'.mt_rand(1,5)));
            $this->addReference('campus'.$i, $campus);
            $manager->persist($campus);
@@ -38,9 +31,9 @@ class CampusFixtures extends Fixture
         $manager->flush();
     }
 
-/*
+
     public function getDependencies():array
     {
-        return [ParticipantsFixtures::class, SortiesFixtures::class];
-    }*/
+        return [UserFixtures::class];
+    }
 }
