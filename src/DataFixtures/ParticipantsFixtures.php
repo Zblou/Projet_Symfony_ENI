@@ -32,7 +32,7 @@ class ParticipantsFixtures extends Fixture implements DependentFixtureInterface
 
 
         for($i = 1 ; $i <= 20 ; $i++){
-            $participant = new Participant();
+            $participant = new Particip();
             $participant->setName($faker->lastName());
             $participant->setFirstname($faker->firstName());
             $participant->setMail($faker->email());
