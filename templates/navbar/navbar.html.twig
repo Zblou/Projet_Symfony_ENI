@@ -11,11 +11,11 @@
                 <a class="nav-link" href="#">Cities</a>
                 <a class="nav-link" href="#">Campus</a>
                 {# Se connecter #}
-                <a class="nav-link" href="#">Log In</a>
+                <a class="nav-link" href="{{ path('app_login') }}">Log In</a>
                 {# Si l'utilisateur est connecté on affiche ces 2 liens #}
                 {% if app.user %}
-                    <a class="nav-link" href="{{ path('app_profile') }}">My profile</a>
-                    <a class="nav-link" href="#">Log Out</a>
+                    <a class="nav-link" href="{{ path('modify_profile' ,{'id' : app.user.id}) }}">My profile</a>
+                    <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>
                 {% endif %}
 
             </div>

@@ -32,10 +32,10 @@ class MyProfileType extends AbstractType
             ])
             ->add('mail', EmailType::class, [
                 'label' => 'Mail'
-            ])
+            ])/*
             ->add('password', PasswordType::class, [
                 'label' => 'Password'
-            ])/*
+            ])
             ->add('passwordConfirm', PasswordType::class, [
                 'label' => 'Confirm Password'
             ])*/
