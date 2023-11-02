@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,19 +26,21 @@ class TripType extends AbstractType
             ])
             ->add('dateStartTime', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'Date de début'
-            ])
+                'label' => 'Date de début de la sortie',
+                'input' => 'datetime_immutable'
+             ])
             ->add('duration', IntegerType::class, [
-                'label' => 'Durée'
+                'label' => 'Durée (en minutes)'
             ])
             ->add('registrationDeadLine', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'Date limite d\'inscription'
+                'label' => 'Date limite d\'inscription',
+                'input' => 'datetime_immutable'
             ])
             ->add('nbRegistrationsMax', IntegerType::class, [
-                'label' => 'Durée'
+                'label' => 'Participants maximum'
             ])
-            ->add('infosTrip', TextType::class, [
+            ->add('infosTrip', TextareaType::class, [
                 'label' => 'Description de la sortie'
             ])
             ->add('campus', EntityType::class, [
