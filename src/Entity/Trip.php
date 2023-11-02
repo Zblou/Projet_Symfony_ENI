@@ -50,12 +50,12 @@ class Trip
     #[ORM\JoinColumn(nullable: false)]
     private ?State $state = null;
 
-    #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'trips')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'trips')]
     private Collection $participants;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Participant $organizer = null;
+    private ?User $organizer = null;
 
     #[ORM\ManyToOne(inversedBy: 'tripsCampus')]
     #[ORM\JoinColumn(nullable: false)]
@@ -172,14 +172,14 @@ class Trip
     }
 
     /**
-     * @return Collection<int, Participant>
+     * @return Collection<int, User>
      */
     public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    public function addParticipant(Participant $participant): static
+    public function addParticipant(User $participant): static
     {
         if (!$this->participants->contains($participant)) {
             $this->participants->add($participant);
@@ -188,14 +188,14 @@ class Trip
         return $this;
     }
 
-    public function removeParticipant(Participant $participant): static
+    public function removeParticipant(User $participant): static
     {
         $this->participants->removeElement($participant);
 
         return $this;
     }
 
-    public function getOrganizer(): ?Participant
+    public function getOrganizer(): ?User
     {
         return $this->organizer;
     }

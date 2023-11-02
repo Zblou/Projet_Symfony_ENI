@@ -23,7 +23,14 @@
             <td>{{ trip.dateStartTime | date('Y-m-d') }}</td>
             <td>{{ trip.registrationDeadLine | date('Y-m-d') }}</td>
             <td>{{ trip.participants | length }}</td>
-            <td>{{ trip.state | length }}</td>
+            <td>{{ trip.state.name }}</td>
+            <td>
+                {% if app.user  in trip.participants  %}
+                    x
+               {% else %}
+                    b
+                {% endif %}
+            </td>
 
         </tr>
     {% endfor %}
