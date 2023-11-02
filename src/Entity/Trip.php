@@ -204,7 +204,7 @@ class Trip
         return $this->organizer;
     }
 
-    public function setOrganizer(?Participant $organizer): static
+    public function setOrganizer(?User $organizer): static
     {
         $this->organizer = $organizer;
 
