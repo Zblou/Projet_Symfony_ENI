@@ -3,6 +3,15 @@
 {% block title %}My profile {% endblock %}
 {% block stylesheets %} <link rel="stylesheet" href="{{ asset('css/formMyProfile.css') }}">{% endblock %}
 {% block body %}
+
+    {%  for label,messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="photo">
         {% if app.user.photoURL %}
 {#            <img src="{{ asset(app.profilepictures_directory ~ app.user.photoURL) }}" alt="profile picture ">#}
