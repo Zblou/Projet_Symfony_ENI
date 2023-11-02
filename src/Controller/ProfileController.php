@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     #[Route('modify/profile/{id}', name: 'modify_profile', requirements: ['id' => '\d+'] ,methods: ['GET','POST'])]
-    public function modify_profile(Participant $participant, Request $request, EntityManagerInterface $em): Response
+    public function modify_profile(User $participant, Request $request, EntityManagerInterface $em): Response
     {
         $myProfileForm = $this->createForm(MyProfileType::class, $participant);
         $myProfileForm->handleRequest($request);
