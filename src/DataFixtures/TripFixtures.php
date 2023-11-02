@@ -36,9 +36,9 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             $trip->setPlace($this->getReference('place'.mt_rand(1,5)));
 
             for($j = 1 ; $j <= mt_rand(5,15) ; $j++){
-                $trip->addParticipant($this->getReference('participant'.mt_rand(1,20)));
+                $trip->addParticipant($this->getReference('user'.mt_rand(1,20)));
             }
-            $trip->setOrganizer($this->getReference('participant'.mt_rand(1,20)));
+            $trip->setOrganizer($this->getReference('user'.mt_rand(1,20)));
             $manager->persist($trip);
         }
 
@@ -47,6 +47,6 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies():array
     {
-        return [ParticipantsFixtures::class, PlaceFixtures::class, StateFixtures::class];
+        return [PlaceFixtures::class, StateFixtures::class];
     }
 }
