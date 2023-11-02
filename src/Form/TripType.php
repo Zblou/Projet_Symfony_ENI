@@ -32,17 +32,13 @@ class TripType extends AbstractType
             ])
             ->add('registrationDeadLine', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'Date limite d\'-inscription'
+                'label' => 'Date limite d\'inscription'
             ])
             ->add('nbRegistrationsMax', IntegerType::class, [
                 'label' => 'Durée'
             ])
             ->add('infosTrip', TextType::class, [
                 'label' => 'Description de la sortie'
-            ])
-            ->add('state', CheckboxType::class, [
-                'label' => 'Publié',
-                'required' => true
             ])
             ->add('campus', EntityType::class, [
                 'label' => 'Campus',
