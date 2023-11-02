@@ -4,19 +4,22 @@
 {% block stylesheets %} <link rel="stylesheet" href="{{ asset('css/formMyProfile.css') }}">{% endblock %}
 {% block body %}
     <div class="photo">
-        PICTURE
-    </div>
-    <div id="formulaire">
-
-        <h2>My profile</h2>
-        {{ form_start(myProfileForm) }}
-        {{ form_widget(myProfileForm) }}
-
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-secondary">Cancel</button>
-
-
-        {{ form_end(myProfileForm) }}
+        <img src="{{ asset('ProfilePictures/defaultPP.jpg') }}" alt="image de profil par défaut">
     </div>
 
+    <div class="row">
+        <div id="formulaire" class="col-12">
+
+            <h2>My profile</h2>
+            {{ form_start(myProfileForm) }}
+            {{ form_widget(myProfileForm) }}
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-light">Réinitialiser le mot de passe</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
+
+
+            {{ form_end(myProfileForm) }}
+        </div>
+    </div>
 {% endblock %}

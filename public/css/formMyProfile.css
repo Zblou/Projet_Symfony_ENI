@@ -14,13 +14,14 @@ body{
 .btn{
     margin-top: 20px;
 }
-.btn-primary{
-    margin-right: 30px;
-}
 .photo{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     margin-top: 7em;
     width: 400px;
     height: 300px;
     float:left;
+}
+img{
+    width: 400px;
+    height: 400px;
 }
