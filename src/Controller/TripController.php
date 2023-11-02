@@ -13,13 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/trip')]
 class TripController extends AbstractController
 {
-    #[Route('/trip', name: 'app_trip')]
-    public function index(): Response
-    {
-        return $this->render('trip/index.html.twig', [
-            'controller_name' => 'TripController',
-        ]);
-    }
 
     #[Route('/create', name: 'create_trip', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $em): Response
