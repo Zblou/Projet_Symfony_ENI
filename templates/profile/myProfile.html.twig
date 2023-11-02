@@ -14,8 +14,8 @@
 
     <div class="photo">
         {% if app.user.photoURL %}
-{#            <img src="{{ asset(app.profilepictures_directory ~ app.user.photoURL) }}" alt="profile picture ">#}
-            <img src="{{ asset('ProfilePictures/') ~ app.user.photoURL }}" alt="SIUU"/>
+            <img src="{{ asset(app.profilepictures_directory ~  app.user.photoURL) }}" alt="profile picture ">
+{#            <img src="{{ asset('ProfilePictures/') ~ app.user.photoURL }}" alt="SIUU"/>#}
         {% endif %}
     </div>
 
@@ -27,9 +27,8 @@
             {{ form_widget(myProfileForm) }}
 
             <button type="submit" class="btn btn-primary">Save</button>
-            <a href="{{ path('app_reset_password') }}" class="btn btn-light">Réinitialiser le mot de passe</a>
+{#            <a href="{{ path() }}" class="btn btn-light">Changer le mot de passe</a>#}
             <a href="{{ path('app_home') }}" class="btn btn-danger">Cancel</a>
-
 
             {{ form_end(myProfileForm) }}
         </div>

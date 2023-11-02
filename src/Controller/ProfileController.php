@@ -26,8 +26,6 @@ class ProfileController extends AbstractController
 
             if($imageURL){
                 $user->setPhotoURL($fileUploader->upload($imageURL));
-            }else{
-                $user->setPhotoURL(null);
             }
 
             $this->addFlash('success','Your profile has been modified');
