@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Participant;
 use App\Entity\User;
+use App\Form\ModifyPasswordType;
 use App\Form\MyProfileType;
 use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,6 +36,17 @@ class ProfileController extends AbstractController
         }
         return $this->render('profile/myProfile.html.twig',[
             'myProfileForm' => $myProfileForm
+        ]);
+    }
+
+    #[Route('/modify/password/{id}', name: 'modify_password', requirements: ['id' => '\d+'], methods: ['GET','POST'])]
+    public function modifyPassword(EntityManagerInterface $em, User $user, Request $request): Response
+    {
+        $changePasswordForm = $this->createForm(ModifyPasswordType::class, $user);
+        $changePasswordForm->handleRequest($request);
+
+        return $this->render('profile/changepassword.html.twig',[
+            'changePasswordForm' => $changePasswordForm
         ]);
     }
 }
