@@ -4,9 +4,44 @@
 
 {% block body %}
 {# boucler sur les sorties #}
-    <ul>
-        {% for trip in trips %}
-            <li>{{ trip.name }}</li>
-        {% endfor %}
-    </ul>
+<table>
+    <thead>
+    <tr>
+        <th>Trip name</th>
+        <th>Trip date</th>
+        <th>Closure</th>
+        <th>Registers/Places</th>
+        <th>State</th>
+        <th>Register</th>
+        <th>Organizer</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for trip in trips %}
+        <tr>
+            <td>{{ trip.name }}</td>
+            <td>{{ trip.dateStartTime | date('Y-m-d') }}</td>
+            <td>{{ trip.registrationDeadLine | date('Y-m-d') }}</td>
+            <td>{{ trip.participants | length }}</td>
+            <td>{{ trip.state.name }}</td>
+            <td>
+                {% if app.user  in trip.participants  %}
+                    x
+               {% else %}
+                    b
+                {% endif %}
+            </td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
+
+
+
+
+
+
+
+
