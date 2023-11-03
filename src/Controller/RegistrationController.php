@@ -34,15 +34,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
 
-        $user->setName("Michael")
-            ->setFirstname('Mica')
-            ->setPhone('0606006063')
-            ->setActive(true)
-        ->setCampus($campus[0]);
-
-        //dd($user);
-
-
         if ($form->isSubmitted()/* && $form->isValid()*/) {
             // encode the plain password
             $user->setPassword(
