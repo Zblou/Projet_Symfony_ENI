@@ -22,7 +22,7 @@ class TripController extends AbstractController
         $trips = $tripRepository->findAll();
         dump($trips);
 
-        return $this->render('trip/index.html.twig', [
+        return $this->render('trip/tripList.html.twig', [
             'trips' => $trips,
         ]);
     }
@@ -58,4 +58,9 @@ class TripController extends AbstractController
         ]);
     }
 
+    #[Route('/display', name: 'trip_display', methods: ['GET','POST'])]
+    public function display(Request $request, EntityManagerInterface $em, TripRepository $tripRepository): Response
+    {
+
+    }
 }
