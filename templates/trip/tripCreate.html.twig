@@ -111,8 +111,9 @@
         </div>
         <br><br>
 
-        <button name="publie" class="btn btn-primary">Publier la sortie</button>
-        <button name="non_publie" class="btn btn-warning">Enregistrer</button>
+
+        {{ form_widget(tripForm.publish) }}
+        {{ form_widget(tripForm.register) }}
         <a class="btn btn-danger" href="#">Annuler</a>
         <br><br>
         {{ form_end(tripForm) }}
