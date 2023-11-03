@@ -5,29 +5,37 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Home</a>
-                <a class="nav-link" href="{{ path('displayAll') }}">Trips</a>
-                <a class="nav-link" href="#">Cities</a>
-                <a class="nav-link" href="#">Campus</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('app_home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('displayAll') }}">Trips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Campus</a>
+                </li>
 
-            </div>
-                <ul class="navbar-nav mr-auto mb-2 mb-lg-0 container-fluid">
-                    {# Si l'utilisateur est connecté on affiche ces 2 liens #}
-                    {% if app.user %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('modify_profile' ,{'id' : app.user.id}) }}">My profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>
-                        </li>
-                        {% else %}
-                    <li class="nav-item">
+            </ul>
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                {# Si l'utilisateur est connecté on affiche ces 2 liens #}
+                {% if app.user %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('modify_profile' ,{'id' : app.user.id}) }}">My profile</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item active">
                             {# Se connecter #}
                             <a class="nav-link" href="{{ path('app_login') }}">Log In</a>
                     </li>
                     {% endif %}
-                </ul>
+            </ul>
         </div>
     </div>
 </nav>

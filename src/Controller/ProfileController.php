@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePasswordFormType;
 use App\Form\ModifyPasswordType;
 use App\Form\MyProfileType;
 use App\Services\FileUploader;
