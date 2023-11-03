@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% block body %}
+    <br>
+    <br>
+    <br>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -17,6 +20,7 @@
         <th>State</th>
         <th>Register</th>
         <th>Organizer</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -35,7 +39,9 @@
 
                 {% endif %}
             </td>
-            <td>{{ trip.organizer | length }}</td>
+            <td>{{ trip.organizer.firstname }}</td>
+
+            <td>{{ trip.infosTrip }}</td>
 
         </tr>
     {% endfor %}
