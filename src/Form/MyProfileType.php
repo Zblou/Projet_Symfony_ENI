@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\Participant;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class MyProfileType extends AbstractType
 {
@@ -30,7 +31,7 @@ class MyProfileType extends AbstractType
             ->add('phone',TextType::class,[
                 'label' => 'Phone number'
             ])
-            ->add('mail', EmailType::class, [
+            ->add('Email', EmailType::class, [
                 'label' => 'Mail'
             ])/*
             ->add('password', PasswordType::class, [
@@ -47,15 +48,24 @@ class MyProfileType extends AbstractType
             ])
             ->add('photoURL',FileType::class,[
                 'label' => 'My Picture',
-                'required' => false
-            ])
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+        new File([
+            'maxSize' => '1M',
+            'mimeTypes' => [
+                'image/png',
+                'image/jpeg'
+            ],
+            'mimeTypesMessage' => 'Please upload a JPG or PDF image'])]
+            ]);
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Participant::class,
+            'data_class' => User::class,
         ]);
     }
 }
