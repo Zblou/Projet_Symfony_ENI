@@ -29,7 +29,7 @@ class Trip
     private ?\DateTimeImmutable $dateStartTime = null;
 
     #[ORM\Column]
-    #[Assert\GreaterThanOrEqual(30, message: 'la durée de la trip doit être de minimum 30 minutes.')]
+    #[Assert\GreaterThanOrEqual(30, message: 'La durée de la trip doit être de minimum 30 minutes.')]
     #[Assert\NotBlank(message: 'Le champ ne peut être vide')]
     private ?int $duration = null;
 

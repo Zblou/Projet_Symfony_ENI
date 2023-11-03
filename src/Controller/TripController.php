@@ -38,6 +38,13 @@ class TripController extends AbstractController
         $tripForm->handleRequest($request);
 
         if($tripForm->isSubmitted() && $tripForm->isValid()){
+            #Check if submit button is either publish or register, and set state according to it
+            if($tripForm->get('publish')->isClicked()){
+                $trip->setState($sr->findOneBy(['name' => 'Ouverte']));
+            }elseif ($tripForm->get('register')->isClicked()){
+                $trip->setState($sr->findOneBy(['name' => 'Créée']));
+            }
+
             $em->persist($trip);
             $em->flush();
 
@@ -50,4 +57,5 @@ class TripController extends AbstractController
             'tripForm' => $tripForm
         ]);
     }
+
 }

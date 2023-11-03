@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,7 +31,11 @@ class TripType extends AbstractType
                 'input' => 'datetime_immutable'
              ])
             ->add('duration', IntegerType::class, [
-                'label' => 'Durée (en minutes)'
+                'label' => 'Durée (en minutes)',
+                'attr' => [
+                    'min' => 30,
+                    'placeholder' => '30 minutes minimum'
+                ]
             ])
             ->add('registrationDeadLine', DateType::class, [
                 'widget' => 'single_text',
@@ -38,7 +43,10 @@ class TripType extends AbstractType
                 'input' => 'datetime_immutable'
             ])
             ->add('nbRegistrationsMax', IntegerType::class, [
-                'label' => 'Participants maximum'
+                'label' => 'Participants maximum',
+                'attr' => [
+                    'min' => 2
+                ]
             ])
             ->add('infosTrip', TextareaType::class, [
                 'label' => 'Description de la sortie'
@@ -54,6 +62,15 @@ class TripType extends AbstractType
                 'class' => Place::class,
                 'choice_label' => 'name',
                 'placeholder' =>'-- Choisir un lieu --'
+            ])
+            ->add('publish', SubmitType::class, [
+                'label' =>'Publier'
+            ])
+            ->add('register', SubmitType::class, [
+                'label' =>'Enregistrer',
+                'attr' => [
+                    'class' => 'btn btn-warning'
+                ]
             ])
         ;
     }
