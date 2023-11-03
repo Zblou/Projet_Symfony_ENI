@@ -2,9 +2,12 @@
 
 {% block title %}Trips List!{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="../../public/css/tripDisplay.css">
+{% endblock %}
+
 {% block body %}
-{# boucler sur les sorties #}
-<table>
+<table class="table table-bordered">
     <thead>
     <tr>
         <th>Trip name</th>
@@ -17,6 +20,7 @@
     </tr>
     </thead>
     <tbody>
+    {# boucler sur les sorties #}
     {% for trip in trips %}
         <tr>
             <td>{{ trip.name }}</td>
@@ -25,12 +29,13 @@
             <td>{{ trip.participants | length }}</td>
             <td>{{ trip.state.name }}</td>
             <td>
-                {% if app.user  in trip.participants  %}
-                    x
+                {% if app.user in trip.participants %}
+                    X
                {% else %}
-                    b
+
                 {% endif %}
             </td>
+            <td>{{ trip.organizer | length }}</td>
 
         </tr>
     {% endfor %}

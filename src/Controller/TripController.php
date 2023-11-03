@@ -32,7 +32,7 @@ class TripController extends AbstractController
     {
         $trip = new Trip();
         $trip->setState($sr->findOneBy(['name' => 'Créée']));
-        $trip->setOrganizer($request->getUser());
+        $trip->setOrganizer($this->getUser());
 
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
