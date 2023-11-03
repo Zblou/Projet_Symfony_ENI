@@ -56,6 +56,7 @@ class ProfileController extends AbstractController
             $this->addFlash('success', 'Your password has been modified');
             $em->persist($user);
             $em->flush();
+            return $this->redirectToRoute('modify_profile', ['id' => $user->getId()]);
         }
         return $this->render('profile/changepassword.html.twig',[
             'changePasswordForm' => $changePasswordForm
