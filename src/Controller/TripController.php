@@ -22,7 +22,7 @@ class TripController extends AbstractController
         $trips = $tripRepository->findAll();
         dump($trips);
 
-        return $this->render('trip/index.html.twig', [
+        return $this->render('trip/tripList.html.twig', [
             'trips' => $trips,
         ]);
     }
