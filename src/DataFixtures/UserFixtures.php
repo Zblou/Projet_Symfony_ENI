@@ -4,12 +4,13 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 ;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(private readonly UserPasswordHasherInterface $userPasswordHasher)
     {
@@ -37,7 +38,6 @@ class UserFixtures extends Fixture
             $user->setName($faker->lastName());
             $user->setFirstname($faker->firstName());
             $user->setEmail($faker->email());
-            //$password = $this->userPasswordHasher->hashPassword($participant, '123456');
             $user->setPassword($this->userPasswordHasher->hashPassword($user,'123465'));
             $user->setCampus($this->getReference('campus'.mt_rand(1,5)));
             $user->setPhone($faker->phoneNumber());
@@ -48,5 +48,10 @@ class UserFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies():array
+    {
+        return [CampusFixtures::class];
     }
 }
