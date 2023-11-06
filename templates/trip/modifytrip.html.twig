@@ -114,7 +114,7 @@
         {{ form_widget(modifyTripForm.register) }}
         {{ form_widget(modifyTripForm.publish) }}
         <a class="btn btn-danger" href="{{ path('delete_trip', {'id' : trip.id}) }}">Delete the trip</a>
-        <a class="btn btn-dark" href="#">Cancel</a>
+        <a class="btn btn-dark" href="{{ path('displayAll') }}">Cancel</a>
         <br><br>
         {{ form_end(modifyTripForm) }}
     </div>

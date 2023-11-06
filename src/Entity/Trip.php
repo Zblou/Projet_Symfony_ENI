@@ -53,7 +53,7 @@ class Trip
     private ?State $state = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'trips')]
-    private Collection $participants;
+    private Collection $users;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -69,7 +69,7 @@ class Trip
 
     public function __construct()
     {
-        $this->participants = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->state = new State();
         $this->state->setName('Créée');
     }
@@ -178,23 +178,23 @@ class Trip
     /**
      * @return Collection<int, User>
      */
-    public function getParticipants(): Collection
+    public function getUser(): Collection
     {
-        return $this->participants;
+        return $this->users;
     }
 
-    public function addParticipant(User $participant): static
+    public function addUser(User $user): static
     {
-        if (!$this->participants->contains($participant)) {
-            $this->participants->add($participant);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
         }
 
         return $this;
     }
 
-    public function removeParticipant(User $participant): static
+    public function removeUser(User $user): static
     {
-        $this->participants->removeElement($participant);
+        $this->users->removeElement($user);
 
         return $this;
     }
