@@ -4,21 +4,32 @@ namespace App\Controller;
 
 use App\Entity\Trip;
 use App\Form\TripType;
+use App\Repository\StateRepository;
+use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ModifyTripController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/modify/trip/{id}', name: 'modify_trip', requirements: ['id' => '\d+'], methods: ['GET','POST'])]
-    public function modifyTrip(Trip $trip, EntityManagerInterface $em, Request $request): Response
+    public function modifyTrip(Trip $trip, EntityManagerInterface $em, Request $request, StateRepository $sr): Response
     {
         $modifyTripForm = $this->createForm(TripType::class,$trip);
         $modifyTripForm->handleRequest($request);
 
         if($modifyTripForm->isSubmitted() and $modifyTripForm->isValid()){
+
+            if($modifyTripForm->get('publish')->isClicked()){
+                $trip->setState($sr->findOneBy(['name' => 'Ouverte']));
+            }elseif ($modifyTripForm->get('register')->isClicked()){
+                $trip->setState($sr->findOneBy(['name' => 'Créée']));
+            }
+
             $this->addFlash('success', 'Your trip has been modified');
             $em->persist($trip);
             $em->flush();
