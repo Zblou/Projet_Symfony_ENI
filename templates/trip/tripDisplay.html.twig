@@ -3,11 +3,21 @@
 {% block title %}Display{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/tripDisplayAll.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tripDisplay.css') }}">
 {% endblock %}
 
 {% block body %}
-    <h1> Trip Display </h1>
+    {%  for label,messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <br>
+    <br>
+    <h1>Trip Display </h1>
+    <br>
     <p>Display name: {{ trip.name }}</p>
     <p>Date and hour: {{ trip.dateStartTime | date('Y-m-d') }}</p>
     <p>Registration Dealdline: {{ trip.registrationDeadLine | date('Y-m-d')}}</p>
