@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modify your trip{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/tripModify.css') }}"
+{% endblock %}
+{% block body %}
+
+    {%  for label,messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container text-center" id="infos">
+        {{ form_start(modifyTripForm) }}
+
+        {# ligne 1 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.name) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.name) }}</div>
+                    {{ form_errors(modifyTripForm.name) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.campus) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.campus) }}</div>
+                    {{ form_errors(modifyTripForm.campus) }}
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        {# ligne 2 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.dateStartTime) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.dateStartTime) }}</div>
+                    {{ form_errors(modifyTripForm.dateStartTime) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.place) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.place) }}</div>
+                    {{ form_errors(modifyTripForm.place) }}
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        {# ligne 3 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.registrationDeadLine) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.registrationDeadLine) }}</div>
+                    {{ form_errors(modifyTripForm.registrationDeadLine) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.nbRegistrationsMax) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.nbRegistrationsMax) }}</div>
+                    {{ form_errors(modifyTripForm.nbRegistrationsMax) }}
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        {# ligne 4 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.duration) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.duration) }}</div>
+                    {{ form_errors(modifyTripForm.duration) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">Rue : zgzgqrfgzgqzreg</div>
+                    <div class="col-6">Code Postal : zefzgsegetsg</div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        {# ligne 5 #}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">{{ form_label(modifyTripForm.infosTrip) }}</div>
+                    <div class="col-6">{{ form_widget(modifyTripForm.infosTrip) }}</div>
+                    {{ form_errors(modifyTripForm.infosTrip) }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">Lat : -0.44865793</div>
+                    <div class="col-6">Long : 41.665982173</div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+
+        {{ form_widget(modifyTripForm.register) }}
+        {{ form_widget(modifyTripForm.publish) }}
+        <a class="btn btn-danger" href="{{ path('delete_trip', {'id' : trip.id}) }}">Delete the trip</a>
+        <a class="btn btn-dark" href="#">Cancel</a>
+        <br><br>
+        {{ form_end(modifyTripForm) }}
+    </div>
+
+{% endblock %}
