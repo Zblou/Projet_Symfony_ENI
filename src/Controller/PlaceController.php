@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\Place;
 use App\Form\PlaceFormType;
 use App\Repository\CityRepository;
@@ -15,19 +16,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlaceController extends AbstractController
 {
     #[Route('/addplace', name: 'add_place', methods: ['GET','POST'])]
-    public function addPlace(Request $request, EntityManagerInterface $em, CityRepository $cr, PlaceRepository $pr): Response
+    public function addPlace(Request $request, EntityManagerInterface $em): Response
     {
         $place = new Place();
         $placeForm = $this->createForm(PlaceFormType::class, $place);
         $placeForm->handleRequest($request);
 
         if($placeForm->isSubmitted() and $placeForm->isValid()){
+            $place->setLongitude(-4.5695);
+            $place->setLatitude(85.5698);
             $this->addFlash('success', 'You added a place');
             $em->persist($place);
             $em->flush();
+            return $this->redirectToRoute('create_trip');
         }
         return $this->render('place/addPlace.html.twig',[
-            'placeForm' => $placeForm
+            'placeForm' => $placeForm,
+            'place' => $place
     ]);
     }
 }
