@@ -18,20 +18,20 @@ class FilterType extends AbstractType
     {
         $builder
             ->add('campus', EntityType::class, [
-                'label' => 'Campus',
+                'label' => 'Campus :',
                 'class' => Campus::class,
                 'choice_label' => 'name',
                 'placeholder' =>'-- Choisir un campus --'
             ])
-            ->add('contains_filter', TextType::class, [
+            ->add('contains', TextType::class, [
                 'label' => 'Le nom de la sortie contient : '
             ])
-            ->add('dateStartTime_filter', DateType::class, [
-            'widget' => 'single_text',
-            'label' => 'Entre ',
-            'input' => 'datetime_immutable'
+            ->add('dateStartTime', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'Entre :',
+                'input' => 'datetime_immutable'
             ])
-            ->add('dateEndTime_filter', DateType::class, [
+            ->add('dateEndTime', DateType::class, [
                 'widget' => 'single_text',
                 'label' => ' et ',
                 'input' => 'datetime_immutable'
@@ -39,10 +39,10 @@ class FilterType extends AbstractType
             ->add('isOrganizer', CheckboxType::class, [
                 'label' => 'Sorties dont je suis l\'organisateur(trice)'
             ])
-            ->add('isRegisterTo', CheckboxType::class, [
+            ->add('isRegisteredTo', CheckboxType::class, [
                 'label' => 'Sorties auxquelles je suis inscrit(e)'
             ])
-            ->add('isNotRegisterTo', CheckboxType::class, [
+            ->add('isNotRegisteredTo', CheckboxType::class, [
                 'label' => 'Sorties auxquelles je ne suis PAS inscrit(e)'
             ])
             ->add('isPassed', CheckboxType::class, [
