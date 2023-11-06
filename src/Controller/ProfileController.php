@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProfileController extends AbstractController
 {
@@ -20,10 +21,13 @@ class ProfileController extends AbstractController
     {
 
     }
-    #[Route('modify/profile/{id}', name: 'modify_profile', requirements: ['id' => '\d+'] ,methods: ['GET','POST'])]
-    public function modify_profile(User $user, Request $request, EntityManagerInterface $em,FileUploader $fileUploader): Response
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('modify/profile', name: 'modify_profile', methods: ['GET','POST'])]
+    public function modify_profile( Request $request, EntityManagerInterface $em,FileUploader $fileUploader): Response
     {
-        $myProfileForm = $this->createForm(MyProfileType::class, $user);
+       
+        $myProfileForm = $this->createForm(MyProfileType::class, $this->getUser());
         $myProfileForm->handleRequest($request);
 
         if($myProfileForm->isSubmitted() && $myProfileForm->isValid()){
@@ -31,32 +35,33 @@ class ProfileController extends AbstractController
             $imageURL = $myProfileForm->get('photoURL')->getData();
 
             if($imageURL){
-                $user->setPhotoURL($fileUploader->upload($imageURL));
+                $this->getUser()->setPhotoURL($fileUploader->upload($imageURL));
             }
 
             $this->addFlash('success','Your profile has been modified');
 
-            $em->persist($user);
+            $em->persist($this->getUser());
             $em->flush();
-            return $this->redirectToRoute('modify_profile', ['id' => $user->getId()]);
+            return $this->redirectToRoute('modify_profile');
         }
         return $this->render('profile/myProfile.html.twig',[
             'myProfileForm' => $myProfileForm
         ]);
     }
 
-    #[Route('/modify/password/{id}', name: 'modify_password', requirements: ['id' => '\d+'], methods: ['GET','POST'])]
-    public function modifyPassword(EntityManagerInterface $em, User $user, Request $request): Response
+    #[IsGranted('ROLE_USER')]
+    #[Route('/modify/password', name: 'modify_password',  methods: ['GET','POST'])]
+    public function modifyPassword(EntityManagerInterface $em, Request $request): Response
     {
-        $changePasswordForm = $this->createForm(ModifyPasswordType::class, $user);
+        $changePasswordForm = $this->createForm(ModifyPasswordType::class, $this->getUser());
         $changePasswordForm->handleRequest($request);
 
         if($changePasswordForm->isSubmitted() && $changePasswordForm->isValid()){
-            $user->setPassword($this->userPasswordHasher->hashPassword($user,$user->getPassword()));
+            $this->getUser()->setPassword($this->userPasswordHasher->hashPassword($this->getUser(),$this->getUser()->getPassword()));
             $this->addFlash('success', 'Your password has been modified');
-            $em->persist($user);
+            $em->persist($this->getUser());
             $em->flush();
-            return $this->redirectToRoute('modify_profile', ['id' => $user->getId()]);
+            return $this->redirectToRoute('modify_profile');
         }
         return $this->render('profile/changepassword.html.twig',[
             'changePasswordForm' => $changePasswordForm
