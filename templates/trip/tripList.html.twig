@@ -10,10 +10,75 @@
     <br>
     <br>
     <br>
-  {#   {{ form_start(filterForm) }}
-        {{ form_widget(filterForm.campus) }}
-    {{ form_end(filterForm) }} #}
     <br>
+    <h2>Filtrer les sorties</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {{ form_start(filterForm) }}
+
+    {# colonne 1 #}
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-5 mt-2">{{ form_label(filterForm.campus) }}</div>
+                <div class="col-4">{{ form_widget(filterForm.campus) }}</div>
+                {{ form_errors(filterForm.campus) }}
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-5 mt-2">{{ form_label(filterForm.contains) }}</div>
+                <div class="col-5">{{ form_widget(filterForm.contains) }}</div>
+                {{ form_errors(filterForm.contains) }}
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2 mt-2">{{ form_label(filterForm.dateStartTime) }}</div>
+                <div class="col-4">{{ form_widget(filterForm.dateStartTime) }}</div>
+                {{ form_errors(filterForm.dateStartTime) }}
+
+
+                <div class="col-2 mt-2 text-center">{{ form_label(filterForm.dateEndTime) }}</div>
+                <div class="col-4">{{ form_widget(filterForm.dateEndTime) }}</div>
+                {{ form_errors(filterForm.dateEndTime) }}
+            </div>
+            <br><br>
+
+            <div class="col-12 text-center"><a style="width: 30em" class="btn btn-primary" href="#">Chercher</a></div>
+            <br>
+        </div>
+
+        {# colonne 2 #}
+        <div class="col-5">
+            <div class="row">
+                <div class="col-2 mt-2 text-end">{{ form_label(filterForm.isOrganizer) }}</div>
+                <div class="col-10">{{ form_widget(filterForm.isOrganizer) }}</div>
+                {{ form_errors(filterForm.isOrganizer) }}
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2 mt-2 text-end">{{ form_label(filterForm.isRegisteredTo) }}</div>
+                <div class="col-10">{{ form_widget(filterForm.isRegisteredTo) }}</div>
+                {{ form_errors(filterForm.isRegisteredTo) }}
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2 mt-2 text-end">{{ form_label(filterForm.isNotRegisteredTo) }}</div>
+                <div class="col-10">{{ form_widget(filterForm.isNotRegisteredTo) }}</div>
+                {{ form_errors(filterForm.isNotRegisteredTo) }}
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2 mt-2 text-end">{{ form_label(filterForm.isPassed) }}</div>
+                <div class="col-10">{{ form_widget(filterForm.isPassed) }}</div>
+                {{ form_errors(filterForm.isPassed) }}
+            </div>
+        </div>
+    </div>
+    <br>
+    {{ form_end(filterForm) }}
     <br>
     <br>
 <table class="table table-bordered">
