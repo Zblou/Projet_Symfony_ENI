@@ -9,16 +9,16 @@
 {% block body %}
     <h1> Trip Display </h1>
     <p>Display name: {{ trip.name }}</p>
-    <p>Date and hour: {{ trip.duration }}</p>
-    <p>Registration Dealdline: {{ trip.registrationDeadLine }}</p>
-    <p>Number of Places: {{ trip.registrationMax }}</p>
+    <p>Date and hour: {{ trip.dateStartTime | date('Y-m-d') }}</p>
+    <p>Registration Dealdline: {{ trip.registrationDeadLine | date('Y-m-d')}}</p>
+    <p>Number of Places: {{ trip.nbRegistrationsMax }}</p>
     <p>Duration (minutes): {{ trip.duration }}</p>
     <p>Description: {{ trip.infosTrip }}</p>
-    <p>Campus: {{ trip.campus }}</p>
-    <p>City: {{ city.name }}</p>
-    <p>State: {{ state.name }}</p>
-    <p>Street: {{ street.name }}</p>
-    <p>Postal Code: {{ city.postalCode }}</p>
-    <p>Latitude: {{ place.latitide }}</p>
-    <p>Longitude: {{ state.longitude }}</p>
+    <p>Campus: {{ trip.campus.name }}</p>
+    <p>City: {{ trip.place.city.name }}</p>
+    <p>State: {{ trip.state.name }}</p>
+    <p>Street: {{ trip.place.street }}</p>
+    <p>Postal Code: {{ trip.place.city.postalCode }}</p>
+    <p>Latitude: {{ trip.place.latitude }}</p>
+    <p>Longitude: {{ trip.place.longitude }}</p>
 {% endblock %}
