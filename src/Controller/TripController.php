@@ -58,9 +58,10 @@ class TripController extends AbstractController
         ]);
     }
 
-    #[Route('/display', name: 'trip_display', methods: ['GET','POST'])]
-    public function display(Request $request, EntityManagerInterface $em, TripRepository $tripRepository): Response
+    #[Route('/display/{id}', name: 'trip_display', requirements: ['id' => '\d+'],  methods: ['GET'])]
+    public function display(Trip $trip,TripRepository $tripRepository): Response
     {
+        return $this->render('trip/tripDisplay.html.twig',['trip' => $trip]);
 
     }
 }

@@ -1,5 +1,24 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Display{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/tripDisplay.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1> Trip Display </h1>
+    <p>Display name: {{ trip.name }}</p>
+    <p>Date and hour: {{ trip.duration }}</p>
+    <p>Registration Dealdline: {{ trip.registrationDeadLine }}</p>
+    <p>Number of Places: {{ trip.registrationMax }}</p>
+    <p>Duration (minutes): {{ trip.duration }}</p>
+    <p>Description: {{ trip.infosTrip }}</p>
+    <p>Campus: {{ trip.campus }}</p>
+    <p>City: {{ city.name }}</p>
+    <p>State: {{ state.name }}</p>
+    <p>Street: {{ street.name }}</p>
+    <p>Postal Code: {{ city.postalCode }}</p>
+    <p>Latitude: {{ place.latitide }}</p>
+    <p>Longitude: {{ state.longitude }}</p>
 {% endblock %}
