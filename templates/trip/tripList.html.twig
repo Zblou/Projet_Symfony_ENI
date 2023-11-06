@@ -101,10 +101,10 @@
             <td>{{ trip.name }}</td>
             <td>{{ trip.dateStartTime | date('Y-m-d') }}</td>
             <td>{{ trip.registrationDeadLine | date('Y-m-d') }}</td>
-            <td>{{ trip.participants | length }}</td>
+            <td>{{ trip.user | length }}</td>
             <td>{{ trip.state.name }}</td>
             <td>
-                {% if app.user in trip.participants %}
+                {% if app.user in trip.user %}
                     X
                {% else %}
 
