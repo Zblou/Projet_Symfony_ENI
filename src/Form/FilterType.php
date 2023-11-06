@@ -24,8 +24,7 @@ class FilterType extends AbstractType
                 'placeholder' =>'-- Choisir un campus --'
             ])
             ->add('contains_filter', TextType::class, [
-                'label' => 'Le nom de la sortie contient : ',
-                'placeholder' =>'Search...'
+                'label' => 'Le nom de la sortie contient : '
             ])
             ->add('dateStartTime_filter', DateType::class, [
             'widget' => 'single_text',
