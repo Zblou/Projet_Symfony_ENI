@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block title %} Create a place {% endblock %}
+
+{% block body %}
+    {{ form_start(placeForm) }}
+    {{ form_widget(placeForm) }}
+    {{ form_end(placeForm) }}
+{% endblock %}
