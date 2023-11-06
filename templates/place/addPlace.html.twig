@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/placeCreation.css') }}"
+{% endblock %}
+{% block title %} Create a place {% endblock %}
+
+{% block body %}
+    {{ form_start(placeForm) }}
+    {{ form_widget(placeForm) }}
+    <button type="submit" class="btn btn-primary">Create place</button>
+    {{ form_end(placeForm) }}
+{% endblock %}

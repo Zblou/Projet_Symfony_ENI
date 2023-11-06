@@ -2,6 +2,8 @@
 {% block title %}Création Sortie{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/tripCreation.css') }}">
+    <link rel="stylesheet" href=
+    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 {% endblock %}
 
 {% block body %}
@@ -29,7 +31,7 @@
             </div>
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">{{ form_label(tripForm.campus) }}</div>
+                    <div class="col-5">{{ form_label(tripForm.campus) }}</div>
                     <div class="col-6">{{ form_widget(tripForm.campus) }}</div>
                     {{ form_errors(tripForm.campus) }}
                 </div>
@@ -48,9 +50,17 @@
             </div>
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">{{ form_label(tripForm.place) }}</div>
-                    <div class="col-6">{{ form_widget(tripForm.place) }}</div>
+                    <div class="col-5">{{ form_label(tripForm.place) }}</div>
+                    <div class="col-6">{{ form_widget(tripForm.place) }} </div>
                     {{ form_errors(tripForm.place) }}
+                    <div class="col-1 mt-1">
+                        <a href="{{ path('add_place') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,7 +77,7 @@
             </div>
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">{{ form_label(tripForm.nbRegistrationsMax) }}</div>
+                    <div class="col-5">{{ form_label(tripForm.nbRegistrationsMax) }}</div>
                     <div class="col-6">{{ form_widget(tripForm.nbRegistrationsMax) }}</div>
                     {{ form_errors(tripForm.nbRegistrationsMax) }}
                 </div>
@@ -86,7 +96,7 @@
             </div>
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">Rue : zgzgqrfgzgqzreg</div>
+                    <div class="col-5">Rue : zgzgqrfgzgqzreg</div>
                     <div class="col-6">Code Postal : zefzgsegetsg</div>
                 </div>
             </div>
@@ -104,7 +114,7 @@
             </div>
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">Lat : -0.44865793</div>
+                    <div class="col-5">Lat : -0.44865793</div>
                     <div class="col-6">Long : 41.665982173</div>
                 </div>
             </div>
@@ -114,7 +124,7 @@
 
         {{ form_widget(tripForm.publish) }}
         {{ form_widget(tripForm.register) }}
-        <a class="btn btn-danger" href="#">Annuler</a>
+        <a class="btn btn-danger" href="{{ path('display_all_updated') }}">Annuler</a>
         <br><br>
         {{ form_end(tripForm) }}
     </div>
