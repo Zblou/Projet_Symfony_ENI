@@ -10,7 +10,7 @@
                     <a class="nav-link active" href="{{ path('app_home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('displayAll') }}">Trips</a>
+                    <a class="nav-link" href="{{ path('display_all_updated') }}">Trips</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Cities</a>
@@ -24,7 +24,7 @@
                 {# Si l'utilisateur est connecté on affiche ces 2 liens #}
                 {% if app.user %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('modify_profile' ,{'id' : app.user.id}) }}">My profile</a>
+                        <a class="nav-link" href="{{ path('modify_profile' ) }}">My profile</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>

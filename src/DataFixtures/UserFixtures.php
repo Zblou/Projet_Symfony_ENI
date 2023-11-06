@@ -38,7 +38,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setName($faker->lastName());
             $user->setFirstname($faker->firstName());
             $user->setEmail($faker->email());
-            $user->setPassword($this->userPasswordHasher->hashPassword($user,'123465'));
+            $user->setPassword($this->userPasswordHasher->hashPassword($user,'123456'));
             $user->setCampus($this->getReference('campus'.mt_rand(1,5)));
             $user->setPhone($faker->phoneNumber());
             $user->setPseudo($faker->userName());
@@ -46,7 +46,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($user);
             $this->addReference('user'.$i, $user);
         }
-
         $manager->flush();
     }
 
