@@ -58,4 +58,9 @@ class TripController extends AbstractController
         ]);
     }
 
+    #[Route('/display', name: 'trip_display', methods: ['GET','POST'])]
+    public function display(Request $request, EntityManagerInterface $em, TripRepository $tripRepository): Response
+    {
+
+    }
 }
