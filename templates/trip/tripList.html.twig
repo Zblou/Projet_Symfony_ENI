@@ -17,7 +17,7 @@
     <br>
     <br>
 
-    {{ form_start(filterForm) }}
+   {{ form_start(filterForm) }}
 
     {# colonne 1 #}
     <div class="row">
@@ -112,12 +112,17 @@
             </td>
             <td>{{ trip.organizer.firstname }}</td>
 
-            <td>{{ trip.infosTrip }}</td>
+            <td><a href="{{ path('trip_display', {'id': trip.id })}}">Display,</a>
+                <a href="{{ path('modify_trip', {'id': trip.id })}}">Modify,</a>
+                <a href="{{ path('delete_trip', {'id': trip.id })}}">Delete,</a>
+                </td>
 
         </tr>
     {% endfor %}
+
     </tbody>
 </table>
+    <a href="{{ path('create_trip') }}" class="btn btn-primary btn-lg">Create Trip</a>
 {% endblock %}
 
 

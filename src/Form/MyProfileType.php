@@ -33,13 +33,7 @@ class MyProfileType extends AbstractType
             ])
             ->add('Email', EmailType::class, [
                 'label' => 'Mail'
-            ])/*
-            ->add('password', PasswordType::class, [
-                'label' => 'Password'
             ])
-            ->add('passwordConfirm', PasswordType::class, [
-                'label' => 'Confirm Password'
-            ])*/
             ->add('campus', EntityType::class,[
                 'label'=> 'Campus',
                 'class' => Campus::class,
