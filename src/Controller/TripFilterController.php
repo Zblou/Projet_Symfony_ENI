@@ -20,20 +20,16 @@ class TripFilterController extends AbstractController
         $filter = new FilterModel();
         $filterForm = $this->createForm(FilterType::class, $filter);
         $filterForm->handleRequest($request);
-        var_dump($filter);
-
 
         if($filterForm->isSubmitted()){
-            var_dump($filter);
-            var_dump($filterForm);
-            $trips->$tr->personnalizedSearch([$filter->campus,
+            $trips = $tr->personnalizedSearch($filter->campus->getId(),
                 $filter->contains,
                 $filter->dateStartTime,
                 $filter->dateEndTime,
                 $filter->isOrganizer,
                 $filter->isRegisteredTo,
                 $filter->isNotRegisteredTo,
-                $filter->isPassed]);
+                $filter->isPassed);
             # Modify SQL request according to the filter object $filter properties
             var_dump($filter);
         }

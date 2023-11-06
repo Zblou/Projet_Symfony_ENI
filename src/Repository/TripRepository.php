@@ -24,13 +24,26 @@ class TripRepository extends ServiceEntityRepository
     /**
      * @return Trip[] Returns an array of Sortie objects
      */
-    public function personnalizedSearch($value): array
+    public function personnalizedSearch($campus, $contains, $dateStartTime,
+                                        $dateEndTime, $isOrganizer, $isRegisteredTo,
+                                        $isNotRegisteredTo, $isPassed): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        $query = $this->createQueryBuilder('q');
+        if($campus != null){
+            # We already get the campus id passed ($campus = campus id)
+            $query->andWhere('q.campus_id = :val')
+            ->setParameter('val', $campus);
+        }
+        if($contains != null){
+            $query->andWhere('q.name LIKE :val2')
+            ->setParameter('val2', $contains);
+        }
+        if($dateStartTime != null){
+        $query->andWhere('q.name LIKE :val2')
+            ->setParameter('val2', $dateStartTime);
+        }
+
+        return $query
             ->getQuery()
             ->getResult()
         ;
