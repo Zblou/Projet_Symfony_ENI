@@ -12,16 +12,28 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TripFilterController extends AbstractController
 {
-    #[Route('/displayAllTrips', name: 'display_all_updated')]
-    public function filter(Request $request, TripRepository $tripRepository): Response
+    #[Route('/displayAllTrips', name: 'display_all_updated', methods: ['GET', 'POST'])]
+    public function filter(Request $request, TripRepository $tr): Response
     {
-        $trips = $tripRepository->findAll();
+        $trips = $tr->findAll();
 
         $filter = new FilterModel();
         $filterForm = $this->createForm(FilterType::class, $filter);
         $filterForm->handleRequest($request);
+        var_dump($filter);
+
 
         if($filterForm->isSubmitted()){
+            var_dump($filter);
+            var_dump($filterForm);
+            $trips->$tr->personnalizedSearch([$filter->campus,
+                $filter->contains,
+                $filter->dateStartTime,
+                $filter->dateEndTime,
+                $filter->isOrganizer,
+                $filter->isRegisteredTo,
+                $filter->isNotRegisteredTo,
+                $filter->isPassed]);
             # Modify SQL request according to the filter object $filter properties
             var_dump($filter);
         }
