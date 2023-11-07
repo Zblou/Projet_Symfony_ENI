@@ -1,18 +1,9 @@
-
 body {
     background-image: linear-gradient( #74a5cc, #777ccc);
+    color: white;
 }
 
-h1{
+h1 {
+    color: white;
     text-align: center;
 }
-
-th{
-    text-align: center;
-}
-
-td {
-    text-align: center;
-}
-
-
