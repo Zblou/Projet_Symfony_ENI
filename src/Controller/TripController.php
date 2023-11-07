@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\State;
 use App\Entity\Trip;
 use App\Form\AnnulationType;
 use App\Form\TripType;
@@ -34,7 +35,7 @@ class TripController extends AbstractController
         $trip = new Trip();
         $trip->setState($sr->findOneBy(['name' => 'Créée']));
         $trip->setOrganizer($this->getUser());
-
+        $trip->addUser($this->getUser());
 
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
@@ -42,9 +43,9 @@ class TripController extends AbstractController
         if($tripForm->isSubmitted() && $tripForm->isValid()){
             #Check if submit button is either publish or register, and set state according to it
             if($tripForm->get('publish')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Ouverte']));
+                $trip->setState($sr->findOneBy(['name' => 'Opened']));
             }elseif ($tripForm->get('register')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Créée']));
+                $trip->setState($sr->findOneBy(['name' => 'Created']));
             }
 
             $em->persist($trip);
@@ -52,7 +53,7 @@ class TripController extends AbstractController
 
             $this->addFlash('success', 'La sortie a bien été enregistrée !');
 
-            return $this->redirectToRoute('displayAll');
+            return $this->redirectToRoute('display_all_updated');
         }
 
         return $this->render('trip/tripCreate.html.twig', [
@@ -73,7 +74,17 @@ class TripController extends AbstractController
     {
         $reasonForm = $this->createForm(AnnulationType::class, $trip);
         $reasonForm->handleRequest($request);
+        return $this->render('trip/tripCancel.html.twig', ['trip' => $trip, 'reasonForm' => $reasonForm]);
 
-        return $this->render('trip/tripCancel.html.twig',['trip' => $trip, 'reasonForm' =>$reasonForm]);
     }
+        #[Route('/{id}/publish', name: 'trip_publish',requirements: ['id' => '\d+'], methods: ['GET','POST'])]
+    public function publish(Trip $trip, EntityManagerInterface $em,State $state): Response
+    {
+        $trip->setState($state->setName('Opened'));
+        $em->persist($trip);
+        $em->flush();
+        return $this->redirectToRoute('display_all_updated');
+    }
+
+
 }
