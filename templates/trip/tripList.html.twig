@@ -123,8 +123,8 @@
 
                 {% endif %}
             </td>
-            <td>{{ trip.organizer.firstname }}
-
+            <td>
+                <a href="{{ path('show_profile', {'id': trip.organizer.id}) }}">{{ trip.organizer.firstname }}</a>
             </td>
 
             <td>
