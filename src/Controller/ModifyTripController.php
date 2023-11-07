@@ -28,9 +28,9 @@ class ModifyTripController extends AbstractController
         if($modifyTripForm->isSubmitted() and $modifyTripForm->isValid()){
 
             if($modifyTripForm->get('publish')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Ouverte']));
+                $trip->setState($sr->findOneBy(['name' => 'Opened']));
             }elseif ($modifyTripForm->get('register')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Créée']));
+                $trip->setState($sr->findOneBy(['name' => 'Created']));
             }
 
             $this->addFlash('success', 'Your trip has been modified');

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\State;
+
 use App\Entity\Trip;
 use App\Form\TripType;
 use App\Repository\StateRepository;
@@ -62,19 +62,28 @@ class TripController extends AbstractController
     }
 
     #[Route('/display/{id}', name: 'trip_display', requirements: ['id' => '\d+'],  methods: ['GET'])]
-    public function display(Trip $trip,TripRepository $tripRepository): Response
+    public function display(Trip $trip): Response
     {
         return $this->render('trip/tripDisplay.html.twig',['trip' => $trip]);
 
     }
     #[Route('/{id}/publish', name: 'trip_publish',requirements: ['id' => '\d+'], methods: ['GET','POST'])]
-    public function publish(Trip $trip, EntityManagerInterface $em,State $state): Response
+    public function publish(Trip $trip, EntityManagerInterface $em): Response
     {
-        $trip->setState($state->setName('Opened'));
+        $trip->getState()->setName('Opened');
         $em->persist($trip);
         $em->flush();
         return $this->redirectToRoute('display_all_updated');
     }
 
+
+    #[Route('/{id}/save', name: 'trip_save',requirements: ['id' => '\d+'], methods: ['GET','POST'])]
+    public function save(Trip $trip, EntityManagerInterface $em): Response
+    {
+        $trip->getState()->setName('Created');
+        $em->persist($trip);
+        $em->flush();
+        return $this->redirectToRoute('display_all_updated');
+    }
 
 }
