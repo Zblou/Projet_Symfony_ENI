@@ -69,7 +69,10 @@ class TripController extends AbstractController
         return $this->render('trip/tripDisplay.html.twig',['trip' => $trip]);
 
     }
-    #[Route('/cancel/{id}', name: 'trip_cancel', requirements: ['id' => '\d+'],  methods: ['GET'])]
+
+
+
+    #[Route('/cancel/{id}', name: 'trip_cancel', requirements: ['id' => '\d+'],  methods: ['GET','POST'])]
     public function cancel(Trip $trip,TripRepository $tripRepository, EntityManagerInterface $em,
                            Request $request, StateRepository $sr): Response
     {
@@ -78,12 +81,11 @@ class TripController extends AbstractController
 
         if($reasonForm->isSubmitted() && $reasonForm->isValid()){
             #Check if submit button is either publish or register, and set state according to it
-
-
+//récupérer l'objet "etat" annuler grace au staterepository et setter l'etat dans le trip
             $em->persist($trip);
             $em->flush();
 
-            $this->addFlash('success', 'Votre demande a bien été enregistrée !');
+            $this->addFlash('success', 'Votre sortie a bien été annulée !');
 
             return $this->redirectToRoute('display_all_updated');
         }
