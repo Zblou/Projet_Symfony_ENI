@@ -34,6 +34,7 @@ class TripController extends AbstractController
         $trip->setState($sr->findOneBy(['name' => 'Créée']));
         $trip->setOrganizer($this->getUser());
 
+
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
 
@@ -54,7 +55,8 @@ class TripController extends AbstractController
         }
 
         return $this->render('trip/tripCreate.html.twig', [
-            'tripForm' => $tripForm
+            'tripForm' => $tripForm,
+
         ]);
     }
 
