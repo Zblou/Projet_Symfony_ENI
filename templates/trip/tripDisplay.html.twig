@@ -20,7 +20,7 @@
     <br>
     <p>Display name: {{ trip.name }}</p>
     <p>Date and hour: {{ trip.dateStartTime | date('Y-m-d') }}</p>
-    <p>Registration Dealdline: {{ trip.registrationDeadLine | date('Y-m-d')}}</p>
+    <p>Registration Deadline: {{ trip.registrationDeadLine | date('Y-m-d')}}</p>
     <p>Number of Places: {{ trip.nbRegistrationsMax }}</p>
     <p>Duration (minutes): {{ trip.duration }}</p>
     <p>Description: {{ trip.infosTrip }}</p>
@@ -31,4 +31,23 @@
     <p>Postal Code: {{ trip.place.city.postalCode }}</p>
     <p>Latitude: {{ trip.place.latitude }}</p>
     <p>Longitude: {{ trip.place.longitude }}</p>
+
+    <br>
+    <h4>List of registered participants:</h4>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Pseudo</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+
+        {%for current in trip.user%}
+        <tr>
+        <td>{{ current.pseudo }}</td>
+            <td>{{ current.firstname }} {{ current.name }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
 {% endblock %}
