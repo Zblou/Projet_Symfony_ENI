@@ -142,8 +142,8 @@
                     <a href="{{ path('delete_trip', {'id': trip.id })}}">Delete</a>
                 {% endif %}
 
-                {% if trip.organizer is same as app.user and  trip.state is same as ('Créée') %}
-                    <a href="#">Publier</a>
+                {% if trip.state.name == "Created" and trip.organizer is same as app.user%}
+                    <a href="{{ path('trip_publish', {'id': trip.id}) }}">Publish</a>
                 {% endif %}
             </td>
 
