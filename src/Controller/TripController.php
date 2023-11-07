@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
+use App\Form\AnnulationType;
 use App\Form\TripType;
 use App\Repository\StateRepository;
 use App\Repository\TripRepository;
@@ -67,8 +68,12 @@ class TripController extends AbstractController
 
     }
     #[Route('/cancel/{id}', name: 'trip_cancel', requirements: ['id' => '\d+'],  methods: ['GET'])]
-    public function cancel(Trip $trip,TripRepository $tripRepository): Response
+    public function cancel(Trip $trip,TripRepository $tripRepository, EntityManagerInterface $em,
+                           Request $request): Response
     {
-        return $this->render('trip/tripCancel.html.twig',['trip' => $trip]);
+        $reasonForm = $this->createForm(AnnulationType::class, $trip);
+        $reasonForm->handleRequest($request);
+
+        return $this->render('trip/tripCancel.html.twig',['trip' => $trip, 'reasonForm' =>$reasonForm]);
     }
 }
