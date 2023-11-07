@@ -66,5 +66,9 @@ class TripController extends AbstractController
         return $this->render('trip/tripDisplay.html.twig',['trip' => $trip]);
 
     }
-
+    #[Route('/cancel/{id}', name: 'trip_cancel', requirements: ['id' => '\d+'],  methods: ['GET'])]
+    public function cancel(Trip $trip,TripRepository $tripRepository): Response
+    {
+        return $this->render('trip/tripCancel.html.twig',['trip' => $trip]);
+    }
 }
