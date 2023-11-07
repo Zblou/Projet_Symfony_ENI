@@ -42,6 +42,11 @@ class StateFixtures extends Fixture
         $manager->persist($state6);
         $this->addReference('state6', $state6);
 
+        $state7 = new State();
+        $state7->setName('Historisée');
+        $manager->persist($state7);
+        $this->addReference('state7', $state7);
+
 
         $manager->flush();
     }
