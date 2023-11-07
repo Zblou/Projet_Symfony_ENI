@@ -66,4 +66,5 @@ class TripController extends AbstractController
         return $this->render('trip/tripDisplay.html.twig',['trip' => $trip]);
 
     }
+
 }
