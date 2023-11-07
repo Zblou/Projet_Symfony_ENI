@@ -78,11 +78,7 @@ class TripController extends AbstractController
 
         if($reasonForm->isSubmitted() && $reasonForm->isValid()){
             #Check if submit button is either publish or register, and set state according to it
-            if($reasonForm->get('publish')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Opened']));
-            }elseif ($reasonForm->get('register')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Created']));
-            }
+
 
             $em->persist($trip);
             $em->flush();
