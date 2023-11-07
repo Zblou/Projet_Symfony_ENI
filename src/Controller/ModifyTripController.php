@@ -48,13 +48,13 @@ class ModifyTripController extends AbstractController
     #[Route('delete/trip/{id}', name: 'delete_trip', requirements: ['id' => '\d+'], methods: ['GET','POST'])]
     public function deleteTrip(Trip $trip, EntityManagerInterface $em): Response
     {
-        if($trip->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')){
+        if($trip->getOrganizer() !== $this->getUser()){
             throw $this->createAccessDeniedException();
         }
 
         $em->remove($trip);
         $em->flush();
         $this->addFlash('success','Your trip has been removed');
-        return $this->redirectToRoute('displayAll');
+        return $this->redirectToRoute('display_all_updated');
     }
 }

@@ -33,7 +33,7 @@ class TripController extends AbstractController
         $trip = new Trip();
         $trip->setState($sr->findOneBy(['name' => 'Créée']));
         $trip->setOrganizer($this->getUser());
-
+        $trip->addUser($this->getUser());
 
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
@@ -51,7 +51,7 @@ class TripController extends AbstractController
 
             $this->addFlash('success', 'La sortie a bien été enregistrée !');
 
-            return $this->redirectToRoute('displayAll');
+            return $this->redirectToRoute('display_all_updated');
         }
 
         return $this->render('trip/tripCreate.html.twig', [
