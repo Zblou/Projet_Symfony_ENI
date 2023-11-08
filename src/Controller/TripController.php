@@ -17,17 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/trip')]
 class TripController extends AbstractController
 {
-    #[Route('/displayAll', name: 'displayAll')]
-    public function trip(TripRepository $tripRepository): Response
-    {
-
-        $trips = $tripRepository->findAll();
-        dump($trips);
-
-        return $this->render('trip/tripList.html.twig', [
-            'trips' => $trips,
-        ]);
-    }
 
     #[Route('/create', name: 'create_trip', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $em, StateRepository $sr): Response
@@ -106,6 +95,7 @@ class TripController extends AbstractController
     #[Route('/{id}/publish', name: 'trip_publish',requirements: ['id' => '\d+'], methods: ['GET','POST'])]
     public function publish(Trip $trip, EntityManagerInterface $em): Response
     {
+
         $trip->getState()->setName('Opened');
         $em->persist($trip);
         $em->flush();
