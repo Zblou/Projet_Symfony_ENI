@@ -145,7 +145,7 @@
                 {% endif %}
 
                 {% if trip.state.name == "Created" and trip.organizer is same as app.user%}
-                    <a href="{{ path('trip_publish', {'id': trip.id}) }}">Publish</a>
+                    <a href="{{ path('modify_trip', {'id': trip.id}) }}">Publish</a>
                 {% endif %}
             </td>
 

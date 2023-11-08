@@ -109,21 +109,11 @@
             </div>
         </div>
         <br><br>
-{#        <div class="row">#}
-{#            <div>#}
-{#                {{ form_label(modifyTripForm.publish) }}#}
-{#                {{ form_label(modifyTripForm.register) }}#}
-{#                {{ form_label(modifyTripForm.delete) }}#}
-{#                {{ form_end(modifyTripForm) }}#}
-{#            </div>#}
-{#        </div>#}
 
-        <button class="btn btn-warning" name="buttonPressed" value="Publish">Publish</button>
-        <button class="btn btn-danger" name="buttonPressed" value="Save"> Save</button>
+
+        <button class="btn btn-warning" name="buttonPressed" value="Save"> Save</button>
+        <button class="btn btn-primary" name="buttonPressed" value="Publish">Publish</button>
         <button class="btn btn-danger" name="buttonPressed" value="Delete"> Delete</button>
-
-
-        <a class="btn btn-dark" href="{{ path('displayAll') }}">Cancel</a>
         {{ form_end(modifyTripForm) }}
         <br><br>
 
