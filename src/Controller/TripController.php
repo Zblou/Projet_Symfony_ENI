@@ -69,6 +69,10 @@ class TripController extends AbstractController
         if($reasonForm->isSubmitted() && $reasonForm->isValid()){
             #Check if submit button is either publish or register, and set state according to it
 //récupérer l'objet "etat" annuler grace au staterepository et setter l'etat dans le trip
+            if($request->get('buttonPressed') == 'Save') {
+                $trip->setState($sr->findOneBy(['name' => 'Canceled']));
+            }
+
             $em->persist($trip);
             $em->flush();
 

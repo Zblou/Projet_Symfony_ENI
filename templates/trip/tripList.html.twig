@@ -141,7 +141,9 @@
 
                 {% if trip.organizer is same as app.user%}
                     <a href="{{ path('modify_trip', {'id': trip.id })}}">Modify</a>
-                    <a href="{{ path('delete_trip', {'id': trip.id })}}">Delete</a>
+                    {% if trip.state.name != 'Canceled' %}
+                    <a href="{{ path('trip_cancel', {'id': trip.id })}}">Cancel</a>
+                {% endif %}
                 {% endif %}
 
                 {% if trip.state.name == "Created" and trip.organizer is same as app.user%}
