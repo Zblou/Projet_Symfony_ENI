@@ -16,21 +16,27 @@
     {% endfor %}
     <br>
     <br>
-    <h1>Trip Display </h1>
-    <br>
-    <p>Display name: {{ trip.name }}</p>
-    <p>Date and hour: {{ trip.dateStartTime | date('Y-m-d') }}</p>
-    <p>Registration Deadline: {{ trip.registrationDeadLine | date('Y-m-d')}}</p>
-    <p>Number of Places: {{ trip.nbRegistrationsMax }}</p>
-    <p>Duration (minutes): {{ trip.duration }}</p>
-    <p>Description: {{ trip.infosTrip }}</p>
-    <p>Campus: {{ trip.campus.name }}</p>
-    <p>City: {{ trip.place.city.name }}</p>
-    <p>State: {{ trip.state.name }}</p>
-    <p>Street: {{ trip.place.street }}</p>
-    <p>Postal Code: {{ trip.place.city.postalCode }}</p>
-    <p>Latitude: {{ trip.place.latitude }}</p>
-    <p>Longitude: {{ trip.place.longitude }}</p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Display name: {{ trip.name }}</p>
+                <p>Date and hour: {{ trip.dateStartTime | date('Y-m-d') }}</p>
+                <p>Registration Deadline: {{ trip.registrationDeadLine | date('Y-m-d') }}</p>
+                <p>Number of Places: {{ trip.nbRegistrationsMax }}</p>
+                <p>Duration (minutes): {{ trip.duration }}</p>
+                <p>Description: {{ trip.infosTrip }}</p>
+            </div>
+            <div class="col">
+                <p>Campus: {{ trip.campus.name }}</p>
+                <p>City: {{ trip.place.city.name }}</p>
+                <p>State: {{ trip.state.name }}</p>
+                <p>Street: {{ trip.place.street }}</p>
+                <p>Postal Code: {{ trip.place.city.postalCode }}</p>
+                <p>Latitude: {{ trip.place.latitude }}</p>
+                <p>Longitude: {{ trip.place.longitude }}</p>
+            </div>
+        </div>
+    </div>
 
     <br>
     <h4>List of registered participants:</h4>
