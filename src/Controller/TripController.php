@@ -80,6 +80,7 @@ class TripController extends AbstractController
     #[Route('/{id}/publish', name: 'trip_publish',requirements: ['id' => '\d+'], methods: ['GET','POST'])]
     public function publish(Trip $trip, EntityManagerInterface $em): Response
     {
+
         $trip->getState()->setName('Opened');
         $em->persist($trip);
         $em->flush();

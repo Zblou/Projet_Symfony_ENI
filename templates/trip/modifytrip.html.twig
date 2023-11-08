@@ -109,17 +109,24 @@
             </div>
         </div>
         <br><br>
+{#        <div class="row">#}
+{#            <div>#}
+{#                {{ form_label(modifyTripForm.publish) }}#}
+{#                {{ form_label(modifyTripForm.register) }}#}
+{#                {{ form_label(modifyTripForm.delete) }}#}
+{#                {{ form_end(modifyTripForm) }}#}
+{#            </div>#}
+{#        </div>#}
+
+        <button class="btn btn-warning" name="buttonPressed" value="Publish">Publish</button>
+        <button class="btn btn-danger" name="buttonPressed" value="Save"> Save</button>
+        <button class="btn btn-danger" name="buttonPressed" value="Delete"> Delete</button>
 
 
-{#        {{ form_widget(modifyTripForm.register) }}#}
-{#        {{ form_widget(modifyTripForm.publish) }}#}
-
-        <a class="btn btn-warning" href="{{ path('trip_publish', {'id' : trip.id}) }}">Save</a>
-        <a class="btn btn-primary" href="{{ path('trip_save', {'id' : trip.id}) }}">Publish</a>
-        <a class="btn btn-danger" href="{{ path('delete_trip', {'id' : trip.id}) }}">Delete the trip</a>
         <a class="btn btn-dark" href="{{ path('displayAll') }}">Cancel</a>
-        <br><br>
         {{ form_end(modifyTripForm) }}
+        <br><br>
+
     </div>
 
 {% endblock %}
