@@ -1,0 +1,40 @@
+body{
+    background-color: teal;
+}
+
+h1{
+    text-align: center;
+}
+
+#photo{
+
+    margin-left: 1em;
+    width: 400px;
+    height: 300px;
+}
+#infos{
+
+    margin-left: 100px;
+    margin-top: 2em;
+}
+img{
+    width: 25em;
+    height: 20em;
+}
+.btn {
+
+    justify-content:center;
+    align-items:center;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+}
+

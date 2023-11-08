@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+ {% block stylesheets %} <link rel="stylesheet" href="{{ asset('css/showProfile.css') }}">{% endblock %}
+{% block body %}
+
+    <h1>{{ user.pseudo }}</h1>
+
+    <div class="row">
+
+        <div  class="col-4" id="photo" >
+            {% if user.photoURL %}
+            <img src="{{ asset(app_profilepictures_directory ~ '/' ~ user.photoURL) }}" alt="profile picture "/>
+             {% endif %}
+        </div>
+
+        <div class="col-4" id="infos">
+
+
+            <h3>Nom: {{ user.name }}</h3>
+            <h3>Prénom: {{ user.firstname }}</h3>
+            <h3>Mail: {{ user.email }}</h3>
+            <h3>Téléphone: {{ user.phone }}</h3>
+            <h3>Campus: {{ user.campus.name }}</h3>
+
+        </div>
+    </div>
+    <br><br>
+
+
+    <a class="btn btn-warning" href="{{ path('display_all_updated',{'id' : user.id}) }}">Retour</a>
+
+
+{% endblock %}

@@ -111,8 +111,11 @@
         <br><br>
 
 
-        {{ form_widget(modifyTripForm.register) }}
-        {{ form_widget(modifyTripForm.publish) }}
+{#        {{ form_widget(modifyTripForm.register) }}#}
+{#        {{ form_widget(modifyTripForm.publish) }}#}
+
+        <a class="btn btn-warning" href="{{ path('trip_publish', {'id' : trip.id}) }}">Save</a>
+        <a class="btn btn-primary" href="{{ path('trip_save', {'id' : trip.id}) }}">Publish</a>
         <a class="btn btn-danger" href="{{ path('delete_trip', {'id' : trip.id}) }}">Delete the trip</a>
         <a class="btn btn-dark" href="{{ path('displayAll') }}">Cancel</a>
         <br><br>

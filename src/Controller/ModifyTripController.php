@@ -28,9 +28,9 @@ class ModifyTripController extends AbstractController
         if($modifyTripForm->isSubmitted() and $modifyTripForm->isValid()){
 
             if($modifyTripForm->get('publish')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Ouverte']));
+                $trip->setState($sr->findOneBy(['name' => 'Opened']));
             }elseif ($modifyTripForm->get('register')->isClicked()){
-                $trip->setState($sr->findOneBy(['name' => 'Créée']));
+                $trip->setState($sr->findOneBy(['name' => 'Created']));
             }
 
             $this->addFlash('success', 'Your trip has been modified');
@@ -48,13 +48,13 @@ class ModifyTripController extends AbstractController
     #[Route('delete/trip/{id}', name: 'delete_trip', requirements: ['id' => '\d+'], methods: ['GET','POST'])]
     public function deleteTrip(Trip $trip, EntityManagerInterface $em): Response
     {
-        if($trip->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')){
+        if($trip->getOrganizer() !== $this->getUser()){
             throw $this->createAccessDeniedException();
         }
 
         $em->remove($trip);
         $em->flush();
         $this->addFlash('success','Your trip has been removed');
-        return $this->redirectToRoute('displayAll');
+        return $this->redirectToRoute('display_all_updated');
     }
 }

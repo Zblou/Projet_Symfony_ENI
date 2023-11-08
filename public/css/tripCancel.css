@@ -1,0 +1,11 @@
+body{
+    background: rgb(34,200,195);
+    background: linear-gradient(0deg, rgba(34,193,198,1) 0%, rgba(253,168,45,1) 100%);
+}
+
+
+#annulation_reasonCancellation{
+    width: auto;
+    height: auto;
+
+}

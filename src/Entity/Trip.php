@@ -151,12 +151,12 @@ class Trip
         return $this;
     }
 
-    public function getMotifAnnulation(): ?string
+    public function getReasonCancellation(): ?string
     {
         return $this->reasonCancellation;
     }
 
-    public function setMotifAnnulation(?string $reasonCancellation): static
+    public function setReasonCancellation(?string $reasonCancellation): static
     {
         $this->reasonCancellation = $reasonCancellation;
 

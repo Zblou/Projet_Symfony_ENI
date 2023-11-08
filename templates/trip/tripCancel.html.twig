@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cancel{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/tripCancel.css') }}">
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<h1>Cancel Trip</h1>
+<br>
+    <div class="container">
+
+            <p>Display name: {{ trip.name }}</p>
+            <p>Date and hour: {{ trip.dateStartTime | date('Y-m-d') }}</p>
+            <p>Campus: {{ trip.campus.name }}</p>
+            <p>Place: {{ trip.place.name }}</p>
+            {{ form_start(reasonForm) }}
+        {{ form_widget(reasonForm) }}
+        <button>Save</button>
+        {{ form_end(reasonForm) }}
+
+<br>
+{#        <a class="btn btn-primary" href="{{ path('display_all_updated',{'id' : trip.id}) }}">Save</a>#}
+        <a class="btn btn-primary" href="{{ path('display_all_updated',{'id' : trip.id}) }}">Cancel</a>
+
+
+    </div>
+
+{% endblock %}

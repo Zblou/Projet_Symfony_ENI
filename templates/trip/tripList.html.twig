@@ -3,10 +3,17 @@
 {% block title %}Trips List!{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="../../public/css/tripDisplay.css">
+<link rel="stylesheet" href="{{ asset('css/tripList.css') }}">
 {% endblock %}
 
 {% block body %}
+    {%  for label,messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <br>
     <br>
     <br>
@@ -16,7 +23,13 @@
     <br>
     <br>
     <br>
-
+    {%  for label,messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
    {{ form_start(filterForm) }}
 
     {# colonne 1 #}
@@ -101,7 +114,7 @@
             <td>{{ trip.name }}</td>
             <td>{{ trip.dateStartTime | date('Y-m-d') }}</td>
             <td>{{ trip.registrationDeadLine | date('Y-m-d') }}</td>
-            <td>{{ trip.user | length }}</td>
+            <td>{{ trip.user | length }}/{{ trip.nbRegistrationsMax }}</td>
             <td>{{ trip.state.name }}</td>
             <td>
                 {% if app.user in trip.user %}
@@ -110,12 +123,31 @@
 
                 {% endif %}
             </td>
-            <td>{{ trip.organizer.firstname }}</td>
+            <td>
+                <a href="{{ path('show_profile', {'id': trip.organizer.id}) }}">{{ trip.organizer.firstname }}</a>
+            </td>
 
-            <td><a href="{{ path('trip_display', {'id': trip.id })}}">Display,</a>
-                <a href="{{ path('modify_trip', {'id': trip.id })}}">Modify,</a>
-                <a href="{{ path('delete_trip', {'id': trip.id })}}">Delete,</a>
-                </td>
+            <td>
+
+                {% if (trip.user | length) < trip.nbRegistrationsMax  and not trip.user.contains(app.user)%}
+                    <a href="{{ path('trip_inscription', {'id': trip.id}) }}">Subscribe</a>
+                {% endif %}
+
+                <a href="{{ path('trip_display', {'id': trip.id })}}">Display</a>
+
+                {% if  trip.user.contains(app.user)%}
+                    <a href="{{ path('trip_desinscription', {'id':trip.id}) }}">Unsubscribe</a>
+                {% endif %}
+
+                {% if trip.organizer is same as app.user%}
+                    <a href="{{ path('modify_trip', {'id': trip.id })}}">Modify</a>
+                    <a href="{{ path('delete_trip', {'id': trip.id })}}">Delete</a>
+                {% endif %}
+
+                {% if trip.state.name == "Created" and trip.organizer is same as app.user%}
+                    <a href="{{ path('trip_publish', {'id': trip.id}) }}">Publish</a>
+                {% endif %}
+            </td>
 
         </tr>
     {% endfor %}
