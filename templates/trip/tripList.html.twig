@@ -110,6 +110,7 @@
     <tbody>
     {# boucler sur les sorties #}
     {% for trip in trips %}
+        {% if trip.state.name != 'Historicized' %}
         <tr>
             <td>{{ trip.name }}</td>
             <td>{{ trip.dateStartTime | date('Y-m-d') }}</td>
@@ -152,6 +153,7 @@
             </td>
 
         </tr>
+        {% endif %}
     {% endfor %}
 
     </tbody>

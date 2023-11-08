@@ -33,7 +33,7 @@ class TripFilterController extends AbstractController
         $dateUpdated =  $date->format('Y-m-d');
         foreach($trips as $trip){
             $datesTrips = $trip->getDateStartTime()->format('Y-m-d');
-            if($datesTrips == $dateUpdated){
+            if($datesTrips == $dateUpdated && $trip->getState()->getName() !== 'Canceled'){
                 $trip->setState($sr->findOneBy(['name' => 'In progress']));
             }
         }
