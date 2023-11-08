@@ -27,44 +27,42 @@ class TripRepository extends ServiceEntityRepository
     /**
      * @return Trip[] Returns an array of Sortie objects
      */
-    public function personnalizedSearch($campus, $contains, $dateStartTime,
-                                        $dateEndTime, $isOrganizer, $isRegisteredTo,
-                                        $isNotRegisteredTo, $isPassed, $user): array
+    public function personnalizedSearch($filter, $user): array
     {
         $query = $this->createQueryBuilder('t');
 
-        if($campus != null){
-            # We already get the campus id passed ($campus = campus id)
+
+        if($filter->getCampus() != null){
             $query->andWhere('t.campus = :val1')
-            ->setParameter('val1', $campus);
+            ->setParameter('val1', $filter->getCampus());
         }
-        if($contains != null){
+        if($filter->getContains() != null){
             $query->andWhere('t.name LIKE :val2')
-            ->setParameter('val2', '%'.$contains.'%');
+            ->setParameter('val2', '%'.$filter->getContains().'%');
         }
-        if($dateStartTime != null){
+        if($filter->getDateStartTime() != null){
         $query->andWhere('t.dateStartTime >= :val3')
-            ->setParameter('val3', $dateStartTime);
+            ->setParameter('val3', $filter->getDateStartTime());
         }
-        if($dateEndTime != null){
+        if($filter->getDateEndTime() != null){
             $query->andWhere('t.registrationDeadLine <= :val4')
-                ->setParameter('val4', $dateEndTime);
+                ->setParameter('val4', $filter->getDateEndTime());
         }
-        if($isOrganizer){
+        if($filter->isOrganizer()){
             $query->andWhere('t.organizer = :val5')
-                ->setParameter('val5', $isOrganizer);
+                ->setParameter('val5', $filter->isOrganizer());
         }
-        if($isRegisteredTo){
+        if($filter->isRegisteredTo()){
             $query->andWhere('tu.users = :val6')
                 ->setParameter('val6', $user)
                 ->join(User::class, 'tu');
         }
-        if($isNotRegisteredTo){
+        if($filter->isNotRegisteredTo()){
             $query->andWhere('tu.users != :val7')
                 ->setParameter('val7', $user)
                 ->leftJoin(User::class, 'tu');
         }
-        if($isPassed){
+        if($filter->isPassed()){
             $query->andWhere('t.dateStartTime > :val8')
                 ->setParameter('val8', now());
         }
