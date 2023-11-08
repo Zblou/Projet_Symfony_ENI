@@ -5,3 +5,8 @@ body{
 .navbar{
     color: orange;
 }
+
+#SortiesEntreAmis{
+    width: 25em;
+    !important;
+}

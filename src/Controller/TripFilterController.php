@@ -12,11 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Constraints\Date;
 use function Symfony\Component\Clock\now;
 
 class TripFilterController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/displayAllTrips', name: 'display_all_updated', methods: ['GET', 'POST'])]
     public function filter(Request $request, TripRepository $tr, StateRepository $sr, HistoryService $hs, PassedService $ps): Response
     {
@@ -31,7 +33,7 @@ class TripFilterController extends AbstractController
         $dateUpdated =  $date->format('Y-m-d');
         foreach($trips as $trip){
             $datesTrips = $trip->getDateStartTime()->format('Y-m-d');
-            if($datesTrips == $dateUpdated){
+            if($datesTrips == $dateUpdated && $trip->getState()->getName() !== 'Canceled'){
                 $trip->setState($sr->findOneBy(['name' => 'In progress']));
             }
         }

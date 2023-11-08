@@ -113,7 +113,7 @@
 
         <button class="btn btn-warning" name="buttonPressed" value="Save"> Save</button>
         <button class="btn btn-primary" name="buttonPressed" value="Publish">Publish</button>
-        <button class="btn btn-danger" name="buttonPressed" value="Delete"> Delete</button>
+        <a class="btn btn-danger" href="{{ path('delete_trip', {'id': trip.id}) }}">Delete</a>
         {{ form_end(modifyTripForm) }}
         <br><br>
 

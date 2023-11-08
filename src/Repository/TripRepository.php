@@ -31,7 +31,8 @@ class TripRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('t')
             ->innerJoin('t.users', 'tu')
-            ->addSelect('tu');
+            ->addSelect('tu')
+            ->innerJoin('t.campus', 'tc');
 
 
         if($filter->getCampus() != null){
@@ -52,18 +53,18 @@ class TripRepository extends ServiceEntityRepository
         }
         if($filter->isOrganizer()){
             $query->andWhere('t.organizer = :val5')
-                ->setParameter('val5', $filter->isOrganizer());
+                ->setParameter('val5', $user);
         }
         if($filter->isRegisteredTo()){
             $query->andWhere(':val6 member of t.users')
                 ->setParameter('val6', $user);
         }
         if($filter->isNotRegisteredTo()){
-            $query->andWhere('t.users != :val7')
+            $query->andWhere(':val7 not member of t.users')
                 ->setParameter('val7', $user);
         }
         if($filter->isPassed()){
-            $query->andWhere('t.dateStartTime > :val8')
+            $query->andWhere('t.dateStartTime < :val8')
                 ->setParameter('val8', now());
         }
 
