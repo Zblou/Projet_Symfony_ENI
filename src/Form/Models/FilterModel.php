@@ -6,16 +6,16 @@ use App\Entity\Campus;
 
 class FilterModel
 {
-    public Campus $campus;
-    public string $contains;
-    public \DateTimeImmutable $dateStartTime;
-    public \DateTimeImmutable $dateEndTime;
-    public bool $isOrganizer;
-    public bool $isRegisteredTo;
-    public bool $isNotRegisteredTo;
-    public bool $isPassed;
+    private ?Campus $campus;
+    private ?string $contains = null;
+    private ?\DateTimeImmutable $dateStartTime = null;
+    private ?\DateTimeImmutable $dateEndTime = null;
+    private ?bool $isOrganizer = null;
+    private ?bool $isRegisteredTo = null;
+    private ?bool $isNotRegisteredTo = null;
+    private ?bool $isPassed = null;
 
-    public function getCampus(): Campus
+    public function getCampus(): ?Campus
     {
         return $this->campus;
     }
@@ -26,7 +26,7 @@ class FilterModel
         return $this;
     }
 
-    public function getContains(): string
+    public function getContains(): ?string
     {
         return $this->contains;
     }
@@ -37,7 +37,7 @@ class FilterModel
         return $this;
     }
 
-    public function getDateStartTime(): \DateTimeImmutable
+    public function getDateStartTime(): ?\DateTimeImmutable
     {
         return $this->dateStartTime;
     }
@@ -48,7 +48,7 @@ class FilterModel
         return $this;
     }
 
-    public function getDateEndTime(): \DateTimeImmutable
+    public function getDateEndTime(): ?\DateTimeImmutable
     {
         return $this->dateEndTime;
     }

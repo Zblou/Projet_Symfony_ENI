@@ -22,16 +22,17 @@ class TripFilterController extends AbstractController
         $filterForm->handleRequest($request);
 
         if($filterForm->isSubmitted()){
-            $trips = $tr->personnalizedSearch($filter->campus->getId(),
-                $filter->contains,
-                $filter->dateStartTime,
-                $filter->dateEndTime,
-                $filter->isOrganizer,
-                $filter->isRegisteredTo,
-                $filter->isNotRegisteredTo,
-                $filter->isPassed);
+            $trips = $tr->personnalizedSearch(
+                $filter->getCampus(),
+                $filter->getContains(),
+                $filter->getDateStartTime(),
+                $filter->getDateEndTime(),
+                $filter->isOrganizer(),
+                $filter->isRegisteredTo(),
+                $filter->isNotRegisteredTo(),
+                $filter->isPassed(),
+                $this->getUser());  # or getUserIdentifier() ?
             # Modify SQL request according to the filter object $filter properties
-            var_dump($filter);
         }
 
         return $this->render('trip/tripList.html.twig', [
