@@ -29,7 +29,6 @@ class TripFilterController extends AbstractController
         $hs->getTableTrip();
         $date = now();
         $dateUpdated =  $date->format('Y-m-d');
-        var_dump($dateUpdated);
         foreach($trips as $trip){
             $datesTrips = $trip->getDateStartTime()->format('Y-m-d');
             if($datesTrips == $dateUpdated){

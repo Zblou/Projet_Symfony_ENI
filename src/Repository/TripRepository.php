@@ -25,11 +25,13 @@ class TripRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Trip[] Returns an array of Sortie objects
+     * @return Trip[] Returns an array of Trip objects
      */
     public function personnalizedSearch($filter, $user): array
     {
-        $query = $this->createQueryBuilder('t');
+        $query = $this->createQueryBuilder('t')
+            ->innerJoin('t.users', 'tu')
+            ->addSelect('tu');
 
 
         if($filter->getCampus() != null){
@@ -53,14 +55,12 @@ class TripRepository extends ServiceEntityRepository
                 ->setParameter('val5', $filter->isOrganizer());
         }
         if($filter->isRegisteredTo()){
-            $query->andWhere('tu.users = :val6')
-                ->setParameter('val6', $user)
-                ->join(User::class, 'tu');
+            $query->andWhere(':val6 member of t.users')
+                ->setParameter('val6', $user);
         }
         if($filter->isNotRegisteredTo()){
-            $query->andWhere('tu.users != :val7')
-                ->setParameter('val7', $user)
-                ->leftJoin(User::class, 'tu');
+            $query->andWhere('t.users != :val7')
+                ->setParameter('val7', $user);
         }
         if($filter->isPassed()){
             $query->andWhere('t.dateStartTime > :val8')
@@ -72,14 +72,4 @@ class TripRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-//    public function findOneBySomeField($value): ?Trip
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
