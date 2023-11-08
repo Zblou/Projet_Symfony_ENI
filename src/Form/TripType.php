@@ -62,17 +62,23 @@ class TripType extends AbstractType
                 'class' => Place::class,
                 'choice_label' => 'name',
                 'placeholder' =>'-- Choisir un lieu --'
-            ])
-            ->add('publish', SubmitType::class, [
-                'label' =>'Publier'
-            ])
-            ->add('register', SubmitType::class, [
-                'label' =>'Enregistrer',
-                'attr' => [
-                    'class' => 'btn btn-warning'
-                ]
-            ])
-        ;
+            ]);
+//            ->add('publish', SubmitType::class, [
+//                'label' =>'Publish'
+//            ])
+//            ->add('register', SubmitType::class, [
+//                'label' =>'Save',
+//                'attr' => [
+//                    'class' => 'btn btn-warning'
+//                ]
+//            ])
+//            ->add('delete',SubmitType::class, [
+//                'label' => 'Delete',
+//                'attr' => [
+//                    'class' => 'btn btn-danger'
+//                ]
+//            ])
+//        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

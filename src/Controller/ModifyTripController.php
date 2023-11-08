@@ -26,16 +26,16 @@ class ModifyTripController extends AbstractController
         $modifyTripForm->handleRequest($request);
 
         if($modifyTripForm->isSubmitted() and $modifyTripForm->isValid()){
-
-            if($modifyTripForm->get('publish')->isClicked()){
+            if($request->get('buttonPressed') == 'Publish'){
                 $trip->setState($sr->findOneBy(['name' => 'Opened']));
-            }elseif ($modifyTripForm->get('register')->isClicked()){
+            }elseif ($request->get('buttonPressed') == 'Save'){
                 $trip->setState($sr->findOneBy(['name' => 'Created']));
             }
 
             $this->addFlash('success', 'Your trip has been modified');
             $em->persist($trip);
             $em->flush();
+            return $this->redirectToRoute('display_all_updated');
         }
 
         return $this->render('trip/modifytrip.html.twig', [

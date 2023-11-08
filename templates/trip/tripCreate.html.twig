@@ -121,9 +121,8 @@
         </div>
         <br><br>
 
-
-        {{ form_widget(tripForm.publish) }}
-        {{ form_widget(tripForm.register) }}
+        <button class="btn btn-warning" name="buttonPressed" value="Save">Save</button>
+        <button class="btn btn-primary" name="buttonPressed" value="Publish">Publish</button>
         <a class="btn btn-danger" href="{{ path('display_all_updated') }}">Annuler</a>
         <br><br>
         {{ form_end(tripForm) }}

@@ -22,7 +22,7 @@ class TripController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em, StateRepository $sr): Response
     {
         $trip = new Trip();
-        $trip->setState($sr->findOneBy(['name' => 'Créée']));
+        $trip->setState($sr->findOneBy(['name' => 'Created']));
         $trip->setOrganizer($this->getUser());
         $trip->addUser($this->getUser());
 
@@ -31,10 +31,9 @@ class TripController extends AbstractController
 
         //exemple à utiliser pour enregistrer l'annulation d'une sortie
         if($tripForm->isSubmitted() && $tripForm->isValid()){
-            #Check if submit button is either publish or register, and set state according to it
-            if($tripForm->get('publish')->isClicked()){
+            if($request->get('buttonPressed') == 'Publish'){
                 $trip->setState($sr->findOneBy(['name' => 'Opened']));
-            }elseif ($tripForm->get('register')->isClicked()){
+            }elseif($request->get('buttonPressed') == 'Save'){
                 $trip->setState($sr->findOneBy(['name' => 'Created']));
             }
 
@@ -48,7 +47,6 @@ class TripController extends AbstractController
 
         return $this->render('trip/tripCreate.html.twig', [
             'tripForm' => $tripForm,
-
         ]);
     }
 
@@ -78,38 +76,18 @@ class TripController extends AbstractController
 
             return $this->redirectToRoute('display_all_updated');
         }
-
-
-
-
-
-
-
-
-
-
-
         return $this->render('trip/tripCancel.html.twig', ['trip' => $trip, 'reasonForm' => $reasonForm]);
 
     }
-    #[Route('/{id}/publish', name: 'trip_publish',requirements: ['id' => '\d+'], methods: ['GET','POST'])]
-    public function publish(Trip $trip, EntityManagerInterface $em): Response
-    {
-        $trip->getState()->setName('Opened');
-        $em->persist($trip);
-        $em->flush();
-        return $this->redirectToRoute('display_all_updated');
-    }
 
-
-    #[Route('/{id}/save', name: 'trip_save',requirements: ['id' => '\d+'], methods: ['GET','POST'])]
-    public function save(Trip $trip, EntityManagerInterface $em): Response
-    {
-        $trip->getState()->setName('Created');
-        $em->persist($trip);
-        $em->flush();
-        return $this->redirectToRoute('trip_display');
-    }
+//    #[Route('/save', name: 'trip_save', methods: ['GET','POST'])]
+//    public function save(Trip $trip, EntityManagerInterface $em): Response
+//    {
+//        $trip->getState()->setName('Created');
+//        $em->persist($trip);
+//        $em->flush();
+//        return $this->redirectToRoute('display_all_updated');
+//    }
 
 
 }
