@@ -6,20 +6,18 @@ h1{
     text-align: center;
 }
 
-#photo{
-    margin-left: 1em;
-    width: 400px;
-    height: 300px;
-}
 #infos{
 
     margin-left: 100px;
     margin-top: 2em;
 }
-img{
-    width: 25em;
-    height: 20em;
+
+#profilPic{
+    margin-left: 1em;
+    width: 400em;
+    height: 300em;
 }
+
 .btn {
 
     justify-content:center;

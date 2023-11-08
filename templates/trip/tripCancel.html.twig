@@ -20,11 +20,10 @@
             {{ form_start(reasonForm) }}
         {{ form_widget(reasonForm) }}
         <button class="btn btn-primary" name="buttonPressed" value="Save">Save</button>
+        <a class="btn btn-primary" href="{{ path('display_all_updated') }}">Cancel</a>
         {{ form_end(reasonForm) }}
 
-<br>
 
-        <a class="btn btn-primary" href="{{ path('display_all_updated') }}">Cancel</a>
 
 
     </div>
