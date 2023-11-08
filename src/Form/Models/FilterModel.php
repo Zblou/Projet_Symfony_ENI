@@ -6,7 +6,7 @@ use App\Entity\Campus;
 
 class FilterModel
 {
-    private ?Campus $campus;
+    private ?Campus $campus = null;
     private ?string $contains = null;
     private ?\DateTimeImmutable $dateStartTime = null;
     private ?\DateTimeImmutable $dateEndTime = null;
@@ -42,7 +42,7 @@ class FilterModel
         return $this->dateStartTime;
     }
 
-    public function setDateStartTime(\DateTimeImmutable $dateStartTime): FilterModel
+    public function setDateStartTime(?\DateTimeImmutable $dateStartTime): FilterModel
     {
         $this->dateStartTime = $dateStartTime;
         return $this;
@@ -53,7 +53,7 @@ class FilterModel
         return $this->dateEndTime;
     }
 
-    public function setDateEndTime(\DateTimeImmutable $dateEndTime): FilterModel
+    public function setDateEndTime(?\DateTimeImmutable $dateEndTime): FilterModel
     {
         $this->dateEndTime = $dateEndTime;
         return $this;
