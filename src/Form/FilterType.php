@@ -24,7 +24,8 @@ class FilterType extends AbstractType
                 'placeholder' =>'-- Choisir un campus --'
             ])
             ->add('contains', TextType::class, [
-                'label' => 'Le nom de la sortie contient : '
+                'label' => 'Le nom de la sortie contient : ',
+                'required' => false
             ])
             ->add('dateStartTime', DateType::class, [
                 'widget' => 'single_text',
@@ -37,16 +38,20 @@ class FilterType extends AbstractType
                 'input' => 'datetime_immutable'
             ])
             ->add('isOrganizer', CheckboxType::class, [
-                'label' => 'Sorties dont je suis l\'organisateur(trice)'
+                'label' => 'Sorties dont je suis l\'organisateur(trice)',
+                'required' => false
             ])
             ->add('isRegisteredTo', CheckboxType::class, [
-                'label' => 'Sorties auxquelles je suis inscrit(e)'
+                'label' => 'Sorties auxquelles je suis inscrit(e)',
+                'required' => false
             ])
             ->add('isNotRegisteredTo', CheckboxType::class, [
-                'label' => 'Sorties auxquelles je ne suis PAS inscrit(e)'
+                'label' => 'Sorties auxquelles je ne suis PAS inscrit(e)',
+                'required' => false
             ])
             ->add('isPassed', CheckboxType::class, [
-                'label' => 'Sorties passées'
+                'label' => 'Sorties passées',
+                'required' => false
             ])
         ;
     }

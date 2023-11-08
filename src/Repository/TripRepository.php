@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Trip;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
+use function Symfony\Component\Clock\now;
 
 /**
  * @extends ServiceEntityRepository<Trip>
@@ -21,20 +24,56 @@ class TripRepository extends ServiceEntityRepository
         parent::__construct($registry, Trip::class);
     }
 
-//    /**
-//     * @return Trip[] Returns an array of Sortie objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Trip[] Returns an array of Sortie objects
+     */
+    public function personnalizedSearch($campus, $contains, $dateStartTime,
+                                        $dateEndTime, $isOrganizer, $isRegisteredTo,
+                                        $isNotRegisteredTo, $isPassed, $user): array
+    {
+        $query = $this->createQueryBuilder('t');
+
+        if($campus != null){
+            # We already get the campus id passed ($campus = campus id)
+            $query->andWhere('t.campus = :val1')
+            ->setParameter('val1', $campus);
+        }
+        if($contains != null){
+            $query->andWhere('t.name LIKE :val2')
+            ->setParameter('val2', '%'.$contains.'%');
+        }
+        if($dateStartTime != null){
+        $query->andWhere('t.dateStartTime >= :val3')
+            ->setParameter('val3', $dateStartTime);
+        }
+        if($dateEndTime != null){
+            $query->andWhere('t.registrationDeadLine <= :val4')
+                ->setParameter('val4', $dateEndTime);
+        }
+        if($isOrganizer){
+            $query->andWhere('t.organizer = :val5')
+                ->setParameter('val5', $isOrganizer);
+        }
+        if($isRegisteredTo){
+            $query->andWhere('tu.users = :val6')
+                ->setParameter('val6', $user)
+                ->join(User::class, 'tu');
+        }
+        if($isNotRegisteredTo){
+            $query->andWhere('tu.users != :val7')
+                ->setParameter('val7', $user)
+                ->leftJoin(User::class, 'tu');
+        }
+        if($isPassed){
+            $query->andWhere('t.dateStartTime > :val8')
+                ->setParameter('val8', now());
+        }
+
+        return $query
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Trip
 //    {
