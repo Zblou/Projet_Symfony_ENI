@@ -40,6 +40,7 @@ class TripController extends AbstractController
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
 
+        //exemple à utiliser pour enregistrer l'annulation d'une sortie
         if($tripForm->isSubmitted() && $tripForm->isValid()){
             #Check if submit button is either publish or register, and set state according to it
             if($tripForm->get('publish')->isClicked()){
@@ -68,12 +69,37 @@ class TripController extends AbstractController
         return $this->render('trip/tripDisplay.html.twig',['trip' => $trip]);
 
     }
-    #[Route('/cancel/{id}', name: 'trip_cancel', requirements: ['id' => '\d+'],  methods: ['GET'])]
+
+
+
+    #[Route('/cancel/{id}', name: 'trip_cancel', requirements: ['id' => '\d+'],  methods: ['GET','POST'])]
     public function cancel(Trip $trip,TripRepository $tripRepository, EntityManagerInterface $em,
-                           Request $request): Response
+                           Request $request, StateRepository $sr): Response
     {
         $reasonForm = $this->createForm(AnnulationType::class, $trip);
         $reasonForm->handleRequest($request);
+
+        if($reasonForm->isSubmitted() && $reasonForm->isValid()){
+            #Check if submit button is either publish or register, and set state according to it
+//récupérer l'objet "etat" annuler grace au staterepository et setter l'etat dans le trip
+            $em->persist($trip);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre sortie a bien été annulée !');
+
+            return $this->redirectToRoute('display_all_updated');
+        }
+
+
+
+
+
+
+
+
+
+
+
         return $this->render('trip/tripCancel.html.twig', ['trip' => $trip, 'reasonForm' => $reasonForm]);
 
     }
@@ -94,7 +120,7 @@ class TripController extends AbstractController
         $trip->getState()->setName('Created');
         $em->persist($trip);
         $em->flush();
-        return $this->redirectToRoute('display_all_updated');
+        return $this->redirectToRoute('trip_display');
     }
 
 

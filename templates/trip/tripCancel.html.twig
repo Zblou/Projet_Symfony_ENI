@@ -19,10 +19,13 @@
             <p>Place: {{ trip.place.name }}</p>
             {{ form_start(reasonForm) }}
         {{ form_widget(reasonForm) }}
+        <button>Save</button>
         {{ form_end(reasonForm) }}
 
-        <td><a href="{{ path('trip_List', {'id': trip.id })}}">Save,</a></td>
-        <td><a href="{{ path('trip_List', {'id': trip.id })}}">Cancel,</a></td>
+<br>
+{#        <a class="btn btn-primary" href="{{ path('display_all_updated',{'id' : trip.id}) }}">Save</a>#}
+        <a class="btn btn-primary" href="{{ path('display_all_updated',{'id' : trip.id}) }}">Cancel</a>
+
 
     </div>
 
