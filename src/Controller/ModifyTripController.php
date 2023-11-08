@@ -35,6 +35,7 @@ class ModifyTripController extends AbstractController
             $this->addFlash('success', 'Your trip has been modified');
             $em->persist($trip);
             $em->flush();
+            return $this->redirectToRoute('display_all_updated');
         }
 
         return $this->render('trip/modifytrip.html.twig', [
