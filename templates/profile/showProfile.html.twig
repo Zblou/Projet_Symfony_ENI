@@ -6,9 +6,9 @@
 
     <div class="row">
 
-        <div  class="col-4" id="photo" >
+        <div  class="col-4" >
             {% if user.photoURL %}
-            <img src="{{ asset(app_profilepictures_directory ~ '/' ~ user.photoURL) }}" alt="profile picture "/>
+            <img id="profilPic" src="{{ asset(app_profilepictures_directory ~ '/' ~ user.photoURL) }}" alt="profile picture "/>
              {% endif %}
         </div>
 

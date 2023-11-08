@@ -12,9 +12,9 @@
         {% endfor %}
     {% endfor %}
 
-    <div class="photo">
+    <div>
         {% if app.user.photoURL %}
-            <img src="{{ asset(app_profilepictures_directory ~ '/' ~ app.user.photoURL) }}" alt="profile picture "/>
+            <img id="photo" src="{{ asset(app_profilepictures_directory ~ '/' ~ app.user.photoURL) }}" alt="profile picture "/>
         {% endif %}
     </div>
 
