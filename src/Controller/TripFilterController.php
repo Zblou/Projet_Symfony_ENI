@@ -25,7 +25,6 @@ class TripFilterController extends AbstractController
         $filterForm->handleRequest($request);
         $date = now();
         $dateUpdated =  $date->format('Y-m-d');
-        var_dump($dateUpdated);
         foreach($trips as $trip){
             $datesTrips = $trip->getDateStartTime()->format('Y-m-d');
             if($datesTrips == $dateUpdated){
