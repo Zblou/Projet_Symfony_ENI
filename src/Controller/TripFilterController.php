@@ -6,6 +6,8 @@ use App\Form\FilterType;
 use App\Form\Models\FilterModel;
 use App\Repository\StateRepository;
 use App\Repository\TripRepository;
+use App\Services\HistoryService;
+use App\Services\PassedService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +20,15 @@ class TripFilterController extends AbstractController
 {
     #[IsGranted('ROLE_USER')]
     #[Route('/displayAllTrips', name: 'display_all_updated', methods: ['GET', 'POST'])]
-    public function filter(Request $request, TripRepository $tr, StateRepository $sr): Response
+    public function filter(Request $request, TripRepository $tr, StateRepository $sr, HistoryService $hs, PassedService $ps): Response
     {
         $trips = $tr->findAll();
 
         $filter = new FilterModel();
         $filterForm = $this->createForm(FilterType::class, $filter);
         $filterForm->handleRequest($request);
+        $ps->setStateToPassed();
+        $hs->getTableTrip();
         $date = now();
         $dateUpdated =  $date->format('Y-m-d');
         foreach($trips as $trip){
