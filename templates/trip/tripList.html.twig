@@ -117,7 +117,7 @@
             <td>{{ trip.registrationDeadLine | date('Y-m-d') }}</td>
             <td>{{ trip.user | length }}/{{ trip.nbRegistrationsMax }}</td>
             <td>{{ trip.state.name }}</td>
-            <td>
+            <td class="text-center">
                 {% if app.user in trip.user %}
                     X
                {% else %}
