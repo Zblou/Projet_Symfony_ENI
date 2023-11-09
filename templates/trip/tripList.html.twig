@@ -110,7 +110,7 @@
     <tbody>
     {# boucler sur les sorties #}
     {% for trip in trips %}
-        {% if trip.state.name != 'Historicized' %}
+        {% if (trip.state.name != 'Historicized') and (trip.state.name != 'Created' and trip.organizer != app.user) %}
         <tr>
             <td>{{ trip.name }}</td>
             <td>{{ trip.dateStartTime | date('Y-m-d') }}</td>
