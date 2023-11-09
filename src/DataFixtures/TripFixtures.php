@@ -16,7 +16,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        for($i = 1; $i <= 5 ; $i++){
+        for($i = 1; $i <= 15 ; $i++){
             $trip = new Trip();
             $trip->setName(implode(" ", $faker->words(3)));
             $date = $faker->dateTimeBetween('-3 month');
