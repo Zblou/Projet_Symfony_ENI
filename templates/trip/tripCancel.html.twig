@@ -19,8 +19,8 @@
             <p>Place: {{ trip.place.name }}</p>
             {{ form_start(reasonForm) }}
         {{ form_widget(reasonForm) }}
-        <button class="btn btn-primary" name="buttonPressed" value="Save">Save</button>
-        <a class="btn btn-primary" href="{{ path('display_all_updated') }}">Cancel</a>
+        <button class="btn btn-danger" name="buttonPressed" value="Save">Cancel the trip</button>
+        <a class="btn btn-primary" href="{{ path('display_all_updated') }}">Go back</a>
         {{ form_end(reasonForm) }}
 
 
