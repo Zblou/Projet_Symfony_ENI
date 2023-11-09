@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class PlaceController extends AbstractController
 {
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
     #[Route('/addplace', name: 'add_place', methods: ['GET','POST'])]
     public function addPlace(Request $request, EntityManagerInterface $em): Response
     {

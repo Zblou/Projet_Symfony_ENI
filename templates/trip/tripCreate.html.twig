@@ -121,10 +121,11 @@
         </div>
         <br><br>
 
-        <button class="btn btn-warning" name="buttonPressed" value="Save">Save</button>
-        <button class="btn btn-primary" name="buttonPressed" value="Publish">Publish</button>
-        <a class="btn btn-danger" href="{{ path('display_all_updated') }}">Annuler</a>
+        <button class="btn btn-dark mx-3 btn-lg" name="buttonPressed" value="Save">Save</button>
+        <button class="btn btn-primary mx-3 btn-lg" name="buttonPressed" value="Publish">Publish</button>
+        <a class="btn btn-danger mx-3 btn-lg" href="{{ path('display_all_updated') }}">Annuler</a>
         <br><br>
         {{ form_end(tripForm) }}
+
     </div>
 {% endblock %}

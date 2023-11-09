@@ -110,7 +110,8 @@
     <tbody>
     {# boucler sur les sorties #}
     {% for trip in trips %}
-        {% if trip.state.name != 'Historicized' %}
+        {% if trip.state.name != 'Historicized'  %}
+            {% if (trip.organizer == app.user and trip.state.name == 'Created') or trip.state.name != 'Created' %}
         <tr>
             <td>{{ trip.name }}</td>
             <td>{{ trip.dateStartTime | date('Y-m-d') }}</td>
@@ -162,12 +163,13 @@
             </td>
 
         </tr>
+                {% endif %}
         {% endif %}
     {% endfor %}
 
     </tbody>
 </table>
-    <a href="{{ path('create_trip') }}" class="btn btn-primary btn-lg">Create Trip</a>
+    <a href="{{ path('create_trip') }}" class="btn btn-dark btn-lg">Create Trip</a>
 {% endblock %}
 
 
