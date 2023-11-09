@@ -7,3 +7,10 @@ h1 {
     color: white;
     text-align: center;
 }
+
+.btn-primary{
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
