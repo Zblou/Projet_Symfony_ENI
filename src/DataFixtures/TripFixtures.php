@@ -19,23 +19,23 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
         for($i = 1; $i <= 15 ; $i++){
             $trip = new Trip();
             $trip->setName(implode(" ", $faker->words(3)));
-            $date = $faker->dateTimeBetween('-3 month');
+            $date = $faker->dateTimeBetween('-2 month', '+1 month');
             $trip->setDateStartTime(\DateTimeImmutable::createFromMutable($date));
 
 
-            $endDate = $faker->dateTimeBetween('now','+2 month');
+            $endDate = $faker->dateTimeBetween('+2 month','+4 month');
             $trip->setRegistrationDeadLine(\DateTimeImmutable::createFromMutable($endDate));
 
 
             $trip->setInfosTrip($faker->realText(300));
             $trip->setDuration(mt_rand(30,240));
-            $trip->setNbRegistrationsMax(mt_rand(2,50));
+            $trip->setNbRegistrationsMax(mt_rand(10,50));
 
             $trip->setState($this->getReference('state'.mt_rand(1,7)));
             $trip->setCampus($this->getReference('campus'.mt_rand(1,5)));
             $trip->setPlace($this->getReference('place'.mt_rand(1,5)));
 
-            for($j = 1 ; $j <= mt_rand(5,10) ; $j++){
+            for($j = 1 ; $j <= mt_rand(2,10) ; $j++){
                 $trip->addUser($this->getReference('user'.mt_rand(1,20)));
             }
             $trip->setOrganizer($this->getReference('user'.mt_rand(1,20)));
