@@ -136,17 +136,24 @@
                     <a href="{{ path('trip_inscription', {'id': trip.id}) }}">Subscribe</a>
                 {% endif %}
 
-                <a href="{{ path('trip_display', {'id': trip.id })}}">Display</a>
+                {%if trip.state.name != 'Created'  %}
+                    <a href="{{ path('trip_display', {'id': trip.id })}}">Display</a>
+                {% endif %}
 
                 {% if  trip.user.contains(app.user) and trip.state.name == 'Opened'%}
-                    <a href="{{ path('trip_desinscription', {'id':trip.id}) }}">Unsubscribe</a>
+                    {% if trip.organizer != app.user %}
+                        <a href="{{ path('trip_desinscription', {'id':trip.id}) }}">Unsubscribe</a>
+                    {% endif %}
+                    {% if trip.organizer == app.user %}
+                        <a href="{{ path('trip_cancel', {'id': trip.id })}}">Cancel</a>
+                    {% endif%}
                 {% endif %}
 
                 {% if trip.organizer is same as app.user%}
-                    <a href="{{ path('modify_trip', {'id': trip.id })}}">Modify</a>
-                    {% if trip.state.name != 'Canceled' %}
-                    <a href="{{ path('trip_cancel', {'id': trip.id })}}">Cancel</a>
-                {% endif %}
+                    {% if trip.state.name == 'Created' %}
+                        <a href="{{ path('modify_trip', {'id': trip.id })}}">Modify</a>
+
+                    {% endif %}
                 {% endif %}
 
                 {% if trip.state.name == "Created" and trip.organizer is same as app.user%}
