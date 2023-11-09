@@ -1,6 +1,11 @@
 body{
-    background-color: forestgreen;
+    background-color: forestgreen !important;
 }
 svg{
     color:black;
+}
+
+.btn-dark{
+    width: 215px;
+
 }
