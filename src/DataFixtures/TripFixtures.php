@@ -31,7 +31,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             $trip->setDuration(mt_rand(30,240));
             $trip->setNbRegistrationsMax(mt_rand(10,50));
 
-            $trip->setState($this->getReference('state'.mt_rand(1,7)));
+            $trip->setState($this->getReference('state'.mt_rand(1,6)));
             $trip->setCampus($this->getReference('campus'.mt_rand(1,5)));
             $trip->setPlace($this->getReference('place'.mt_rand(1,5)));
 

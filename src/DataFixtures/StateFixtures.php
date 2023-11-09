@@ -27,26 +27,26 @@ class StateFixtures extends Fixture
         $manager->persist($state3);
         $this->addReference('state3', $state3);
 
+
         $state4 = new State();
-        $state4->setName('In progress');
+        $state4->setName('Passed');
         $manager->persist($state4);
         $this->addReference('state4', $state4);
 
         $state5 = new State();
-        $state5->setName('Passed');
+        $state5->setName('Canceled');
         $manager->persist($state5);
         $this->addReference('state5', $state5);
 
         $state6 = new State();
-        $state6->setName('Canceled');
+        $state6->setName('Historicized');
         $manager->persist($state6);
         $this->addReference('state6', $state6);
 
         $state7 = new State();
-        $state7->setName('Historicized');
+        $state7->setName('In progress');
         $manager->persist($state7);
         $this->addReference('state7', $state7);
-
 
         $manager->flush();
     }
