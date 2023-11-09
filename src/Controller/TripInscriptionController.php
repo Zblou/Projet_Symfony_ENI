@@ -16,6 +16,7 @@ class TripInscriptionController extends AbstractController
         $trip->addUser($this->getUser());
         $em->persist($trip);
         $em->flush();
+        $this->addFlash('success', 'You have been subscribe for this trip');
         return $this->redirectToRoute('display_all_updated');
     }
 
@@ -25,6 +26,7 @@ class TripInscriptionController extends AbstractController
         $trip->removeUser($this->getUser());
         $em->persist($trip);
         $em->flush();
+        $this->addFlash('success', 'You have been unsubscribe for this trip');
         return $this->redirectToRoute('display_all_updated');
     }
 }

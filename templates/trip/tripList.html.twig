@@ -130,13 +130,15 @@
 
             <td>
 
-                {% if (trip.user | length) < trip.nbRegistrationsMax  and not trip.user.contains(app.user)%}
+                {% if (trip.user | length) < trip.nbRegistrationsMax
+                    and not trip.user.contains(app.user)
+                    and trip.state.name == 'Opened'%}
                     <a href="{{ path('trip_inscription', {'id': trip.id}) }}">Subscribe</a>
                 {% endif %}
 
                 <a href="{{ path('trip_display', {'id': trip.id })}}">Display</a>
 
-                {% if  trip.user.contains(app.user)%}
+                {% if  trip.user.contains(app.user) and trip.state.name == 'Opened'%}
                     <a href="{{ path('trip_desinscription', {'id':trip.id}) }}">Unsubscribe</a>
                 {% endif %}
 
